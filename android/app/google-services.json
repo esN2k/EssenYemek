@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "188409565395",
-    "project_id": "essen-yemek-79lvwr",
-    "storage_bucket": "essen-yemek-79lvwr.firebasestorage.app"
+    "project_number": "1035153418038",
+    "project_id": "essenyemek-db65c",
+    "storage_bucket": "essenyemek-db65c.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:188409565395:android:5560f492a329d0d8fe0426",
+        "mobilesdk_app_id": "1:1035153418038:android:566df0e12516e1bc523597",
         "android_client_info": {
           "package_name": "com.essenyemek"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBNUBjcBEXfLScSswoxG2pPKynZidgz3hs"
+          "current_key": "AIzaSyDOYi-iuTsTJY3Qwy72aDRIMN62kmwBVGQ"
         }
       ],
       "services": {
