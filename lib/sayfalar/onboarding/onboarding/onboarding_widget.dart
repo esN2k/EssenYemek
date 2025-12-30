@@ -24,10 +24,40 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  List<DietOptionsStruct> _fallbackDietOptions() => [
+        DietOptionsStruct(
+          dietName: 'Balanced',
+          dietTagline: 'Everyday meals',
+        ),
+        DietOptionsStruct(
+          dietName: 'High Protein',
+          dietTagline: 'Lean & strong',
+        ),
+        DietOptionsStruct(
+          dietName: 'Vegetarian',
+          dietTagline: 'Plant based',
+        ),
+      ];
+
+  List<String> _fallbackAllergenOptions() => const [
+        'Gluten',
+        'Dairy',
+        'Eggs',
+        'Nuts',
+      ];
+
+  List<String> _fallbackIngredientOptions() => const [
+        'Onion',
+        'Garlic',
+        'Mushroom',
+        'Peppers',
+      ];
+
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => OnboardingModel());
+    _model.dietSelection ??= '';
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Onboarding'});
     // On page load action.
@@ -64,7 +94,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
-        if (!snapshot.hasData) {
+        if (snapshot.connectionState == ConnectionState.waiting &&
+            !snapshot.hasData) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Center(
@@ -80,16 +111,26 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
             ),
           );
         }
-        List<OnboardingOptionsRecord> onboardingOnboardingOptionsRecordList =
-            snapshot.data!;
-        // Return an empty Container when the item does not exist.
-        if (snapshot.data!.isEmpty) {
-          return Container();
-        }
+        final onboardingOnboardingOptionsRecordList =
+            snapshot.data ?? const <OnboardingOptionsRecord>[];
         final onboardingOnboardingOptionsRecord =
             onboardingOnboardingOptionsRecordList.isNotEmpty
                 ? onboardingOnboardingOptionsRecordList.first
                 : null;
+        final onboardingDietOptions =
+            (onboardingOnboardingOptionsRecord?.dietOptions.isNotEmpty ?? false)
+                ? onboardingOnboardingOptionsRecord!.dietOptions
+                : _fallbackDietOptions();
+        final onboardingAllergenOptions =
+            (onboardingOnboardingOptionsRecord?.allergenOptions.isNotEmpty ??
+                    false)
+                ? onboardingOnboardingOptionsRecord!.allergenOptions
+                : _fallbackAllergenOptions();
+        final onboardingIngredientOptions =
+            (onboardingOnboardingOptionsRecord?.ingredientOptions.isNotEmpty ??
+                    false)
+                ? onboardingOnboardingOptionsRecord!.ingredientOptions
+                : _fallbackIngredientOptions();
 
         return Title(
             title: 'Onboarding',
@@ -169,10 +210,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                               child: Builder(
                                                 builder: (context) {
                                                   final diet =
-                                                      onboardingOnboardingOptionsRecord
-                                                              ?.dietOptions
-                                                              .toList() ??
-                                                          [];
+                                                      onboardingDietOptions;
 
                                                   return Column(
                                                     mainAxisSize:
@@ -190,8 +228,12 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                                             'Keybqj_${dietIndex}_of_${diet.length}'),
                                                         dietType:
                                                             dietItem.dietName,
-                                                        selectedDiet: _model
-                                                            .dietSelection!,
+                                                        selectedDiet:
+                                                            valueOrDefault<
+                                                                String>(
+                                                          _model.dietSelection,
+                                                          '',
+                                                        ),
                                                         dietTagline: dietItem
                                                             .dietTagline,
                                                         action: () async {
@@ -251,10 +293,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                                   Builder(
                                                     builder: (context) {
                                                       final allergens =
-                                                          onboardingOnboardingOptionsRecord
-                                                                  ?.allergenOptions
-                                                                  .toList() ??
-                                                              [];
+                                                          onboardingAllergenOptions;
 
                                                       return Wrap(
                                                         spacing: 8.0,
@@ -359,10 +398,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                                   Builder(
                                                     builder: (context) {
                                                       final dislikes =
-                                                          onboardingOnboardingOptionsRecord
-                                                                  ?.ingredientOptions
-                                                                  .toList() ??
-                                                              [];
+                                                          onboardingIngredientOptions;
 
                                                       return Wrap(
                                                         spacing: 8.0,
@@ -451,7 +487,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                             logFirebaseEvent('Button_haptic_feedback');
                             HapticFeedback.lightImpact();
                             logFirebaseEvent('Button_update_app_state');
-                            FFAppState().userDiet = _model.dietSelection!;
+                            FFAppState().userDiet =
+                                valueOrDefault(_model.dietSelection, '');
                             FFAppState().userAllergens = _model
                                 .allergenSelection
                                 .toList()
