@@ -480,35 +480,73 @@ class _OnboardingHesapOlusturWidgetState
                                   singleRecord: true,
                                 ),
                                 builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 25.0,
-                                        height: 25.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }
                                   List<CompanyInformationRecord>
                                       richTextCompanyInformationRecordList =
-                                      snapshot.data!;
-                                  // Return an empty Container when the item does not exist.
-                                  if (snapshot.data!.isEmpty) {
-                                    return Container();
-                                  }
+                                      snapshot.data ?? const [];
                                   final richTextCompanyInformationRecord =
                                       richTextCompanyInformationRecordList
                                               .isNotEmpty
                                           ? richTextCompanyInformationRecordList
                                               .first
                                           : null;
+                                  final termsUrl = richTextCompanyInformationRecord
+                                          ?.termsURL
+                                          .trim() ??
+                                      '';
+                                  final hasTermsUrl = termsUrl.isNotEmpty;
+
+                                  final termsText = RichText(
+                                    textScaler: MediaQuery.of(context).textScaler,
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            '6ongsqy2' /* "Hesap Olustur" secenegine tik... */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodySmall
+                                              .override(
+                                                fontFamily: 'Sora',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                        TextSpan(
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            '2pblnw75' /* Kullanim Kosullarini */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodySmall
+                                              .override(
+                                                fontFamily: 'Sora',
+                                                letterSpacing: 0.0,
+                                                decoration: hasTermsUrl
+                                                    ? TextDecoration.underline
+                                                    : TextDecoration.none,
+                                              ),
+                                        ),
+                                        TextSpan(
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            'bhixtav8' /*  kabul etmis olursunuz. */,
+                                          ),
+                                          style: const TextStyle(),
+                                        )
+                                      ],
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodySmall
+                                          .override(
+                                            fontFamily: 'Sora',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  );
+
+                                  if (!hasTermsUrl) {
+                                    return termsText;
+                                  }
 
                                   return InkWell(
                                     splashColor: Colors.transparent,
@@ -519,58 +557,9 @@ class _OnboardingHesapOlusturWidgetState
                                       logFirebaseEvent(
                                           'ONBOARDING_HESAP_OLUSTUR_RichText_t8sm75');
                                       logFirebaseEvent('RichText_launch_u_r_l');
-                                      await launchURL(
-                                          richTextCompanyInformationRecord!
-                                              .termsURL);
+                                      await launchURL(termsUrl);
                                     },
-                                    child: RichText(
-                                      textScaler:
-                                          MediaQuery.of(context).textScaler,
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: FFLocalizations.of(context)
-                                                .getText(
-                                              '6ongsqy2' /* “Hesap Oluştur” seçeneğine tık... */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodySmall
-                                                .override(
-                                                  fontFamily: 'Sora',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                          TextSpan(
-                                            text: FFLocalizations.of(context)
-                                                .getText(
-                                              '2pblnw75' /* Kullanım Koşullarını */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodySmall
-                                                .override(
-                                                  fontFamily: 'Sora',
-                                                  letterSpacing: 0.0,
-                                                  decoration:
-                                                      TextDecoration.underline,
-                                                ),
-                                          ),
-                                          TextSpan(
-                                            text: FFLocalizations.of(context)
-                                                .getText(
-                                              'bhixtav8' /*  kabul etmiş olursunuz. */,
-                                            ),
-                                            style: const TextStyle(),
-                                          )
-                                        ],
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodySmall
-                                            .override(
-                                              fontFamily: 'Sora',
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
+                                    child: termsText,
                                   );
                                 },
                               ),
