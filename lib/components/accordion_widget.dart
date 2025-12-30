@@ -122,7 +122,7 @@ class _AccordionWidgetState extends State<AccordionWidget> {
                           'soru',
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
+                              fontFamily: 'Sora',
                               fontSize: 16.0,
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.w600,
@@ -142,7 +142,7 @@ class _AccordionWidgetState extends State<AccordionWidget> {
                       'cevap',
                     ),
                     style: FlutterFlowTheme.of(context).labelLarge.override(
-                          fontFamily: 'Inter',
+                          fontFamily: 'Sora',
                           letterSpacing: 0.0,
                           lineHeight: 1.4,
                         ),

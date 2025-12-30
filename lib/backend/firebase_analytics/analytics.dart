@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 import '../../auth/firebase_auth/auth_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -10,6 +11,10 @@ const kMaxParameterLength = 100;
 void logFirebaseEvent(String eventName, {Map<String?, dynamic>? parameters}) {
   // https://firebase.google.com/docs/reference/cpp/group/event-names
   assert(eventName.length <= kMaxEventNameLength);
+
+  if (Firebase.apps.isEmpty) {
+    return;
+  }
 
   parameters ??= {};
   parameters.putIfAbsent(

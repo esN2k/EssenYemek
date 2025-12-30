@@ -8,6 +8,24 @@ service cloud.firestore {
       allow delete: if request.auth.uid == document;
     }
 
+    match /plans/{document} {
+      allow create: if request.auth.uid == document;
+      allow read: if request.auth.uid == document;
+      allow update: if request.auth.uid == document;
+      allow delete: if request.auth.uid == document;
+    }
+
+    match /orders/{document} {
+      allow create: if request.auth != null &&
+          request.resource.data.user_id == request.auth.uid;
+      allow read: if request.auth != null &&
+          resource.data.user_id == request.auth.uid;
+      allow update: if request.auth != null &&
+          resource.data.user_id == request.auth.uid;
+      allow delete: if request.auth != null &&
+          resource.data.user_id == request.auth.uid;
+    }
+
     match /meals/{document} {
       allow create: if false;
       allow read: if request.auth != null;

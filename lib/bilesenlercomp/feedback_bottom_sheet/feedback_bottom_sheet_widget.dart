@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -94,7 +96,7 @@ class _FeedbackBottomSheetWidgetState extends State<FeedbackBottomSheetWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .titleLarge
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Sora',
                                   letterSpacing: 0.0,
                                 ),
                           ),
@@ -118,7 +120,7 @@ class _FeedbackBottomSheetWidgetState extends State<FeedbackBottomSheetWidget> {
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .bodySmall
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Sora',
                                       letterSpacing: 0.0,
                                     ),
                                 enabledBorder: OutlineInputBorder(
@@ -156,7 +158,7 @@ class _FeedbackBottomSheetWidgetState extends State<FeedbackBottomSheetWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Sora',
                                     fontSize: 16.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
@@ -208,7 +210,7 @@ class _FeedbackBottomSheetWidgetState extends State<FeedbackBottomSheetWidget> {
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Sora',
                                     letterSpacing: 0.0,
                                   ),
                               elevation: 0.0,

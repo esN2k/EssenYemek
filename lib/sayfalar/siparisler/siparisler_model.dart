@@ -1,10 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'panel_widget.dart' show PanelWidget;
+import 'siparisler_widget.dart' show SiparislerWidget;
 import 'package:flutter/material.dart';
 
-class PanelModel extends FlutterFlowModel<PanelWidget> {
-  String? activeDiet;
-
+class SiparislerModel extends FlutterFlowModel<SiparislerWidget> {
   @override
   void initState(BuildContext context) {}
 

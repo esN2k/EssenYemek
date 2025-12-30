@@ -87,7 +87,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .displaySmall
                                         .override(
-                                          fontFamily: 'Inter',
+                                          fontFamily: 'Sora',
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -98,7 +98,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .displaySmall
                                         .override(
-                                          fontFamily: 'Inter',
+                                          fontFamily: 'Sora',
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
                                           letterSpacing: 0.0,
@@ -108,7 +108,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .displaySmall
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Sora',
                                       fontSize: 32.0,
                                       letterSpacing: 0.0,
                                     ),
@@ -149,7 +149,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Sora',
                                   letterSpacing: 0.0,
                                 ),
                             elevation: 0.0,
@@ -190,7 +190,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodySmall
                                             .override(
-                                              fontFamily: 'Inter',
+                                              fontFamily: 'Sora',
                                               letterSpacing: 0.0,
                                             ),
                                       ),
@@ -202,7 +202,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Inter',
+                                              fontFamily: 'Sora',
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w600,
                                               decoration:
@@ -213,7 +213,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Inter',
+                                          fontFamily: 'Sora',
                                           letterSpacing: 0.0,
                                         ),
                                   ),

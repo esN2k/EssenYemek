@@ -113,7 +113,7 @@ class _HakkimizdaWidgetState extends State<HakkimizdaWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .displaySmall
                                         .override(
-                                          fontFamily: 'Inter',
+                                          fontFamily: 'Sora',
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -226,7 +226,7 @@ class _HakkimizdaWidgetState extends State<HakkimizdaWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .displaySmall
                                         .override(
-                                          fontFamily: 'Inter',
+                                          fontFamily: 'Sora',
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -239,7 +239,7 @@ class _HakkimizdaWidgetState extends State<HakkimizdaWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .labelLarge
                                       .override(
-                                        fontFamily: 'Inter',
+                                        fontFamily: 'Sora',
                                         letterSpacing: 0.0,
                                         lineHeight: 1.4,
                                       ),
@@ -261,7 +261,7 @@ class _HakkimizdaWidgetState extends State<HakkimizdaWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .headlineSmall
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily: 'Sora',
                                                 letterSpacing: 0.0,
                                               ),
                                         ),
@@ -273,9 +273,8 @@ class _HakkimizdaWidgetState extends State<HakkimizdaWidget> {
                                             builder: (context) {
                                               final chefs =
                                                   columnCompanyInformationRecord
-                                                          .chefInfo
-                                                          .toList() ??
-                                                      [];
+                                                      .chefInfo
+                                                      .toList();
 
                                               return Column(
                                                 mainAxisSize: MainAxisSize.max,
@@ -344,7 +343,7 @@ class _HakkimizdaWidgetState extends State<HakkimizdaWidget> {
                                                                       .titleMedium
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Inter',
+                                                                            'Sora',
                                                                         letterSpacing:
                                                                             0.0,
                                                                       ),
@@ -371,7 +370,7 @@ class _HakkimizdaWidgetState extends State<HakkimizdaWidget> {
                                                                           .bodySmall
                                                                           .override(
                                                                             fontFamily:
-                                                                                'Inter',
+                                                                                'Sora',
                                                                             letterSpacing:
                                                                                 0.0,
                                                                           ),

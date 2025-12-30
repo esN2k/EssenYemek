@@ -157,7 +157,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .displaySmall
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Sora',
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -234,7 +234,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .displaySmall
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Sora',
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -342,7 +342,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .displaySmall
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Sora',
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -487,7 +487,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Sora',
                                   letterSpacing: 0.0,
                                 ),
                             elevation: 0.0,

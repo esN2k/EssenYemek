@@ -6,8 +6,10 @@ export '/sayfalar/onboarding/onboarding_slayt/onboarding_slayt_widget.dart'
 export '/sayfalar/onboarding/onboarding_hesap_olustur/onboarding_hesap_olustur_widget.dart'
     show OnboardingHesapOlusturWidget;
 export '/sayfalar/meals/panel/panel_widget.dart' show PanelWidget;
+export '/sayfalar/plan/plan_widget.dart' show PlanWidget;
 export '/sayfalar/meals/yemek_detaylar/yemek_detaylar_widget.dart'
     show YemekDetaylarWidget;
+export '/sayfalar/siparisler/siparisler_widget.dart' show SiparislerWidget;
 export '/sayfalar/profil/profil/profil_widget.dart' show ProfilWidget;
 export '/sayfalar/profil/profili_duzenle/profili_duzenle_widget.dart'
     show ProfiliDuzenleWidget;

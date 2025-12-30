@@ -34,7 +34,8 @@ dependencies:
   cloud_firestore: 5.5.0
   cloud_firestore_platform_interface: 6.5.0
   cloud_firestore_web: 4.3.4
-  collection: 1.18.0
+  collection: 1.19.1
+  crypto: 3.0.7
   easy_debounce: 2.0.1
   firebase_analytics: 11.3.5
   firebase_analytics_platform_interface: 4.2.7
@@ -65,7 +66,7 @@ dependencies:
   google_sign_in_ios: 5.7.7
   google_sign_in_platform_interface: 2.4.5
   google_sign_in_web: 0.12.4+2
-  intl: 0.19.0
+  intl: 0.20.2
   json_path: 0.7.2
   page_transition: 2.1.0
   path_provider: 2.1.4
@@ -93,7 +94,7 @@ dependencies:
   sqflite: 2.3.3+1
   sqflite_common: 2.5.4+3
   stream_transform: 2.1.0
-  timeago: 3.6.1
+  timeago: 3.7.1
   url_launcher: 6.3.0
   url_launcher_android: 6.3.10
   url_launcher_ios: 6.3.1
@@ -117,6 +118,9 @@ dev_dependencies:
   image: 4.2.0
   lints: 4.0.0
   flutter_test:
+    sdk: flutter
+  fake_cloud_firestore: 3.0.2
+  integration_test:
     sdk: flutter
 
 

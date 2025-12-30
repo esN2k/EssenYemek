@@ -1,10 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'panel_widget.dart' show PanelWidget;
+import 'plan_widget.dart' show PlanWidget;
 import 'package:flutter/material.dart';
 
-class PanelModel extends FlutterFlowModel<PanelWidget> {
-  String? activeDiet;
-
+class PlanModel extends FlutterFlowModel<PlanWidget> {
   @override
   void initState(BuildContext context) {}
 

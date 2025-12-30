@@ -1,10 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/plan_service.dart';
 import '/bilesenlercomp/meal_bottom_sheet/meal_bottom_sheet_widget.dart';
 import '/components/custom_appbar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -65,9 +67,12 @@ class _YemekDetaylarWidgetState extends State<YemekDetaylarWidget>
 
   @override
   Widget build(BuildContext context) {
+    final theme = FlutterFlowTheme.of(context);
+    final meal = widget.mealRef;
+
     return Title(
         title: 'YemekDetaylar',
-        color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
+        color: theme.primary.withAlpha(0XFF),
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
@@ -75,459 +80,431 @@ class _YemekDetaylarWidgetState extends State<YemekDetaylarWidget>
           },
           child: Scaffold(
             key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: const AlignmentDirectional(0.0, -1.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 450.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: Image.network(
-                                valueOrDefault<String>(
-                                  widget.mealRef?.mealImage,
-                                  'https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-                                ),
-                              ).image,
+            backgroundColor: theme.primaryBackground,
+            body: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  backgroundColor: theme.primaryBackground,
+                  automaticallyImplyLeading: false,
+                  pinned: true,
+                  expandedHeight: 320.0,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: Image.network(
+                            valueOrDefault<String>(
+                              meal?.mealImage,
+                              'https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
                             ),
-                            borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(0.0),
-                              bottomRight: Radius.circular(0.0),
-                              topLeft: Radius.circular(24.0),
-                              topRight: Radius.circular(24.0),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Positioned.fill(
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.transparent,
+                                  theme.primaryBackground.withAlpha(230),
+                                ],
+                                begin: const AlignmentDirectional(0.0, -0.6),
+                                end: const AlignmentDirectional(0.0, 1.0),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Align(
-                            alignment: const AlignmentDirectional(0.0, -1.0),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 54.0, 24.0, 0.0),
-                              child: wrapWithModel(
-                                model: _model.customAppbarModel,
-                                updateCallback: () => safeSetState(() {}),
-                                child: CustomAppbarWidget(
-                                  backButton: true,
-                                  actionButton: false,
-                                  optionsButton: true,
-                                  actionButtonAction: () async {},
-                                  optionsButtonAction: () async {
-                                    logFirebaseEvent(
-                                        'YEMEK_DETAYLAR_Container_vg6xlkz2_CALLBA');
-                                    logFirebaseEvent(
-                                        'customAppbar_bottom_sheet');
-                                    await showModalBottomSheet(
-                                      isScrollControlled: true,
-                                      backgroundColor: const Color(0x00FFFFFF),
-                                      barrierColor: const Color(0x00000000),
-                                      context: context,
-                                      builder: (context) {
-                                        return GestureDetector(
-                                          onTap: () {
-                                            FocusScope.of(context).unfocus();
-                                            FocusManager.instance.primaryFocus
-                                                ?.unfocus();
-                                          },
-                                          child: Padding(
-                                            padding: MediaQuery.viewInsetsOf(
-                                                context),
-                                            child: MealBottomSheetWidget(
-                                              mealRef: widget.mealRef,
-                                            ),
+                        SafeArea(
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                20.0, 12.0, 20.0, 0.0),
+                            child: wrapWithModel(
+                              model: _model.customAppbarModel,
+                              updateCallback: () => safeSetState(() {}),
+                              child: CustomAppbarWidget(
+                                backButton: true,
+                                actionButton: false,
+                                optionsButton: true,
+                                actionButtonAction: () async {},
+                                optionsButtonAction: () async {
+                                  logFirebaseEvent(
+                                      'YEMEK_DETAYLAR_OptionsButton_ON_TAP');
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: const Color(0x00FFFFFF),
+                                    barrierColor: const Color(0x00000000),
+                                    context: context,
+                                    builder: (context) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          FocusScope.of(context).unfocus();
+                                          FocusManager.instance.primaryFocus
+                                              ?.unfocus();
+                                        },
+                                        child: Padding(
+                                          padding: MediaQuery.viewInsetsOf(
+                                              context),
+                                          child: MealBottomSheetWidget(
+                                            mealRef: widget.mealRef,
                                           ),
-                                        );
-                                      },
-                                    ).then((value) => safeSetState(() {}));
-                                  },
+                                        ),
+                                      );
+                                    },
+                                  ).then((value) => safeSetState(() {}));
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                        if (meal?.mealCalories != null && meal!.mealCalories != 0)
+                          Positioned(
+                            left: 24.0,
+                            bottom: 24.0,
+                            child: Container(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 6.0, 12.0, 6.0),
+                              decoration: BoxDecoration(
+                                color: theme.secondaryBackground
+                                    .withAlpha(235),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              child: Text(
+                                '${meal.mealCalories} kalori',
+                                style: theme.labelSmall.override(
+                                  fontFamily: 'Sora',
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
                           ),
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(0.0),
-                                bottomRight: Radius.circular(0.0),
-                                topLeft: Radius.circular(24.0),
-                                topRight: Radius.circular(24.0),
+                      ],
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: theme.primaryBackground,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(32.0),
+                        topRight: Radius.circular(32.0),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          24.0, 24.0, 24.0, 32.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    meal?.mealName,
+                                    'Yemek',
+                                  ),
+                                  style: theme.displaySmall.override(
+                                    fontFamily: 'Sora',
+                                    letterSpacing: -0.4,
+                                    lineHeight: 1.2,
+                                  ),
+                                ),
+                              ),
+                              if (meal != null)
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      12.0, 2.0, 0.0, 0.0),
+                                  child: StreamBuilder<MealsRecord>(
+                                    stream: MealsRecord.getDocument(
+                                        meal.reference),
+                                    builder: (context, snapshot) {
+                                      if (!snapshot.hasData) {
+                                        return SizedBox(
+                                          width: 28.0,
+                                          height: 28.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              theme.primary,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      final liveMeal = snapshot.data!;
+                                      final isFavorite = liveMeal.mealFavorites
+                                          .contains(currentUserReference);
+                                      return InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          logFirebaseEvent(
+                                              'YEMEK_DETAYLAR_Favorite_ON_TAP');
+                                          if (isFavorite) {
+                                            HapticFeedback.lightImpact();
+                                            await meal.reference.update({
+                                              ...mapToFirestore(
+                                                {
+                                                  'meal_favorites':
+                                                      FieldValue.arrayRemove(
+                                                          [currentUserReference]),
+                                                },
+                                              ),
+                                            });
+                                          } else {
+                                            HapticFeedback.selectionClick();
+                                            await meal.reference.update({
+                                              ...mapToFirestore(
+                                                {
+                                                  'meal_favorites':
+                                                      FieldValue.arrayUnion(
+                                                          [currentUserReference]),
+                                                },
+                                              ),
+                                            });
+                                          }
+                                        },
+                                        child: Icon(
+                                          isFavorite
+                                              ? Icons.favorite_rounded
+                                              : Icons.favorite_border_rounded,
+                                          color: isFavorite
+                                              ? const Color(0xFFFF4E59)
+                                              : theme.secondaryText,
+                                          size: 28.0,
+                                        ).animateOnPageLoad(animationsMap[
+                                            'iconOnPageLoadAnimation']!),
+                                      );
+                                    },
+                                  ),
+                                ),
+                            ],
+                          ),
+                          if (meal?.mealDiet.isNotEmpty ?? false)
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 12.0, 0.0, 0.0),
+                              child: Wrap(
+                                spacing: 8.0,
+                                runSpacing: 8.0,
+                                children: meal!.mealDiet
+                                    .map((diet) => Container(
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(12.0, 6.0, 12.0, 6.0),
+                                          decoration: BoxDecoration(
+                                            color: theme.accent1,
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          child: Text(
+                                            diet,
+                                            style: theme.labelSmall.override(
+                                              fontFamily: 'Sora',
+                                              color: theme.primary,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ))
+                                    .toList(),
                               ),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(24.0),
+                          if (meal?.mealIngredients != null &&
+                              meal!.mealIngredients.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 20.0, 0.0, 0.0),
                               child: Column(
-                                mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          valueOrDefault<String>(
-                                            widget.mealRef?.mealName,
-                                            'Yemek İsmi',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .displaySmall
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                letterSpacing: 0.0,
-                                                lineHeight: 1.2,
-                                              ),
-                                        ),
-                                      ),
-                                      Align(
-                                        alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  18.0, 2.0, 0.0, 0.0),
-                                          child: StreamBuilder<MealsRecord>(
-                                            stream: MealsRecord.getDocument(
-                                                widget.mealRef!.reference),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 25.0,
-                                                    height: 25.0,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      valueColor:
-                                                          AlwaysStoppedAnimation<
-                                                              Color>(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primary,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-
-                                              final stackMealsRecord =
-                                                  snapshot.data!;
-
-                                              return InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  logFirebaseEvent(
-                                                      'YEMEK_DETAYLAR_Stack_9idss4zc_ON_TAP');
-                                                  if (stackMealsRecord
-                                                      .mealFavorites
-                                                      .contains(
-                                                          currentUserReference)) {
-                                                    logFirebaseEvent(
-                                                        'Stack_haptic_feedback');
-                                                    HapticFeedback
-                                                        .lightImpact();
-                                                    logFirebaseEvent(
-                                                        'Stack_backend_call');
-
-                                                    await widget
-                                                        .mealRef!.reference
-                                                        .update({
-                                                      ...mapToFirestore(
-                                                        {
-                                                          'meal_favorites':
-                                                              FieldValue
-                                                                  .arrayRemove([
-                                                            currentUserReference
-                                                          ]),
-                                                        },
-                                                      ),
-                                                    });
-                                                  } else {
-                                                    logFirebaseEvent(
-                                                        'Stack_haptic_feedback');
-                                                    HapticFeedback
-                                                        .selectionClick();
-                                                    logFirebaseEvent(
-                                                        'Stack_wait__delay');
-                                                    await Future.delayed(
-                                                        const Duration(
-                                                            milliseconds: 100));
-                                                    logFirebaseEvent(
-                                                        'Stack_haptic_feedback');
-                                                    HapticFeedback
-                                                        .lightImpact();
-                                                    logFirebaseEvent(
-                                                        'Stack_backend_call');
-
-                                                    await widget
-                                                        .mealRef!.reference
-                                                        .update({
-                                                      ...mapToFirestore(
-                                                        {
-                                                          'meal_favorites':
-                                                              FieldValue
-                                                                  .arrayUnion([
-                                                            currentUserReference
-                                                          ]),
-                                                        },
-                                                      ),
-                                                    });
-                                                  }
-                                                },
-                                                child: Stack(
-                                                  children: [
-                                                    Align(
-                                                      alignment:
-                                                          const AlignmentDirectional(
-                                                              1.0, -1.0),
-                                                      child: Icon(
-                                                        Icons
-                                                            .favorite_border_rounded,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        size: 32.0,
-                                                      ),
-                                                    ),
-                                                    if (stackMealsRecord
-                                                        .mealFavorites
-                                                        .contains(
-                                                            currentUserReference))
-                                                      Align(
-                                                        alignment:
-                                                            const AlignmentDirectional(
-                                                                1.0, -1.0),
-                                                        child: const Icon(
-                                                          Icons
-                                                              .favorite_rounded,
-                                                          color:
-                                                              Color(0xFFFF4E59),
-                                                          size: 32.0,
-                                                        ).animateOnPageLoad(
-                                                            animationsMap[
-                                                                'iconOnPageLoadAnimation']!),
-                                                      ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                  Text(
+                                    FFLocalizations.of(context)
+                                        .getVariableText(
+                                      trText: 'Malzemeler',
+                                      enText: 'Ingredients',
+                                    ),
+                                    style: theme.titleSmall.override(
+                                      fontFamily: 'Sora',
+                                      letterSpacing: 0.0,
+                                    ),
                                   ),
-                                  if (widget.mealRef?.mealCalories != null)
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 6.0, 0.0, 0.0),
-                                      child: Text(
-                                        '${valueOrDefault<String>(
-                                          widget.mealRef?.mealCalories
-                                              .toString(),
-                                          '0',
-                                        )} kalori',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelLarge
-                                            .override(
-                                              fontFamily: 'Inter',
-                                              letterSpacing: 0.0,
-                                              lineHeight: 1.5,
-                                            ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional
+                                        .fromSTEB(0.0, 8.0, 0.0, 0.0),
+                                    child: Text(
+                                      meal.mealIngredients,
+                                      style: theme.bodyMedium.override(
+                                        fontFamily: 'Sora',
+                                        letterSpacing: 0.0,
+                                        lineHeight: 1.6,
                                       ),
                                     ),
-                                  if (widget.mealRef?.mealIngredients !=
-                                          null &&
-                                      widget.mealRef?.mealIngredients != '')
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 24.0, 0.0, 0.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'p7j8y38u' /* Malzemeler */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  letterSpacing: 0.0,
-                                                  lineHeight: 1.5,
-                                                ),
-                                          ),
-                                          Text(
-                                            valueOrDefault<String>(
-                                              widget.mealRef?.mealIngredients,
-                                              'yemek_içindekiler',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodySmall
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  fontSize: 16.0,
-                                                  letterSpacing: 0.0,
-                                                  lineHeight: 1.5,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  if (widget.mealRef!.mealAllergens.isNotEmpty)
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 24.0, 0.0, 0.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'pobcme6j' /* Alerjenler */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  letterSpacing: 0.0,
-                                                  lineHeight: 1.5,
-                                                ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 6.0, 0.0, 0.0),
-                                            child: Builder(
-                                              builder: (context) {
-                                                final allergens = widget
-                                                        .mealRef?.mealAllergens
-                                                        .toList() ??
-                                                    [];
-
-                                                return Wrap(
-                                                  spacing: 0.0,
-                                                  runSpacing: 0.0,
-                                                  alignment:
-                                                      WrapAlignment.start,
-                                                  crossAxisAlignment:
-                                                      WrapCrossAlignment.start,
-                                                  direction: Axis.horizontal,
-                                                  runAlignment:
-                                                      WrapAlignment.start,
-                                                  verticalDirection:
-                                                      VerticalDirection.down,
-                                                  clipBehavior: Clip.none,
-                                                  children: List.generate(
-                                                      allergens.length,
-                                                      (allergensIndex) {
-                                                    final allergensItem =
-                                                        allergens[
-                                                            allergensIndex];
-                                                    return Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  8.0,
-                                                                  8.0),
-                                                      child: Container(
-                                                        height: 44.0,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              const Color(0xFFFFECAA),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      24.0,
-                                                                      12.0,
-                                                                      24.0,
-                                                                      12.0),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .min,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  allergensItem,
-                                                                  '[alerjen maddeler]',
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      color: const Color(
-                                                                          0xFF81681E),
-                                                                      fontSize:
-                                                                          16.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-                          ),
+                          if (meal != null && meal.mealAllergens.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 20.0, 0.0, 0.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    FFLocalizations.of(context)
+                                        .getVariableText(
+                                      trText: 'Alerjenler',
+                                      enText: 'Allergens',
+                                    ),
+                                    style: theme.titleSmall.override(
+                                      fontFamily: 'Sora',
+                                      letterSpacing: 0.0,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional
+                                        .fromSTEB(0.0, 8.0, 0.0, 0.0),
+                                    child: Wrap(
+                                      spacing: 8.0,
+                                      runSpacing: 8.0,
+                                      children: meal.mealAllergens
+                                          .map((allergen) => Container(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(12.0, 6.0, 12.0, 6.0),
+                                                decoration: BoxDecoration(
+                                                  color: theme.accent2,
+                                                  borderRadius:
+                                                      BorderRadius.circular(20.0),
+                                                ),
+                                                child: Text(
+                                                  allergen,
+                                                  style: theme.labelSmall.override(
+                                                    fontFamily: 'Sora',
+                                                    color: theme.primaryText,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ))
+                                          .toList(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ],
+            ),
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                color: theme.secondaryBackground,
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 16.0,
+                    color: theme.primaryText.withAlpha(20),
+                    offset: const Offset(0.0, -6.0),
+                  ),
+                ],
+              ),
+              child: SafeArea(
+                top: false,
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      24.0, 12.0, 24.0, 12.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      logFirebaseEvent(
+                          'YEMEK_DETAYLAR_AddToPlanButton_ON_TAP');
+                      if (meal == null) {
+                        return;
+                      }
+                      final userRef = currentUserReference;
+                      if (userRef == null) {
+                        showSnackbar(
+                          context,
+                          FFLocalizations.of(context).getVariableText(
+                            trText:
+                                'Plan\u0131na eklemek i\u00e7in giri\u015f yapmal\u0131s\u0131n.',
+                            enText: 'Please sign in to add to your plan.',
+                          ),
+                        );
+                        return;
+                      }
+                      final planMeals = FFAppState().planMeals;
+                      if (planMeals.contains(meal.reference)) {
+                        showSnackbar(
+                          context,
+                          FFLocalizations.of(context).getVariableText(
+                            trText: 'Bu yemek zaten plan\u0131nda.',
+                            enText: 'This meal is already in your plan.',
+                          ),
+                        );
+                        return;
+                      }
+                      if (planMeals.length >= FFAppState().planMealsPerWeek) {
+                        showSnackbar(
+                          context,
+                          FFLocalizations.of(context).getVariableText(
+                            trText: 'Plan dolu. Birini \u00e7\u0131kar\u0131p ekleyin.',
+                            enText:
+                                'Plan is full. Remove one meal to add another.',
+                          ),
+                        );
+                        return;
+                      }
+                      FFAppState().update(() {
+                        FFAppState().addToPlanMeals(meal.reference);
+                      });
+                      await PlanService.savePlanFromState(
+                        state: FFAppState(),
+                        userRef: userRef,
+                      );
+                      if (!context.mounted) {
+                        return;
+                      }
+                      showSnackbar(
+                        context,
+                        FFLocalizations.of(context).getVariableText(
+                          trText: 'Haftal\u0131k plana eklendi.',
+                          enText: 'Added to your weekly plan.',
+                        ),
+                      );
+                    },
+                    text: FFLocalizations.of(context).getVariableText(
+                      trText: 'Haftaya ekle',
+                      enText: 'Add to plan',
+                    ),
+                    options: FFButtonOptions(
+                      height: 48.0,
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          16.0, 0.0, 16.0, 0.0),
+                      color: theme.primary,
+                      textStyle: theme.bodyMedium.override(
+                        fontFamily: 'Sora',
+                        color: theme.secondaryBackground,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      elevation: 0.0,
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(24.0),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
         ));

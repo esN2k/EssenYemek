@@ -293,7 +293,7 @@ Yemek P... */
                                                           context)
                                                       .displaySmall
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Sora',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ).animateOnPageLoad(animationsMap[
@@ -324,7 +324,7 @@ Yemek P... */
                                                           context)
                                                       .labelLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Sora',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ).animateOnPageLoad(animationsMap[
@@ -351,7 +351,7 @@ Yemek P... */
                                                           context)
                                                       .displaySmall
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Sora',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ).animateOnPageLoad(animationsMap[
@@ -382,7 +382,7 @@ Yemek P... */
                                                           context)
                                                       .labelLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Sora',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ).animateOnPageLoad(animationsMap[
@@ -411,7 +411,7 @@ Zahmetsiz */
                                                           context)
                                                       .displaySmall
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Sora',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ).animateOnPageLoad(animationsMap[
@@ -442,7 +442,7 @@ Zahmetsiz */
                                                           context)
                                                       .labelLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Sora',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ).animateOnPageLoad(animationsMap[
@@ -545,7 +545,7 @@ Zahmetsiz */
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Sora',
                                     letterSpacing: 0.0,
                                   ),
                               elevation: 0.0,

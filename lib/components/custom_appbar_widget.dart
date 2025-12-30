@@ -99,7 +99,7 @@ class _CustomAppbarWidgetState extends State<CustomAppbarWidget> {
                       const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
                   textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Inter',
+                        fontFamily: 'Sora',
                         color: FlutterFlowTheme.of(context).primaryBackground,
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.w600,
@@ -120,7 +120,7 @@ class _CustomAppbarWidgetState extends State<CustomAppbarWidget> {
                 buttonSize: 44.0,
                 fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                 icon: FaIcon(
-                  FontAwesomeIcons.ellipsisH,
+                  FontAwesomeIcons.ellipsis,
                   color: FlutterFlowTheme.of(context).primaryText,
                   size: 18.0,
                 ),

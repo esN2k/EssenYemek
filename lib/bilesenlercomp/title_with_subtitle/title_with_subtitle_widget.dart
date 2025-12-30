@@ -57,7 +57,7 @@ class _TitleWithSubtitleWidgetState extends State<TitleWithSubtitleWidget> {
               'Test title',
             ),
             style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Inter',
+                  fontFamily: 'Sora',
                   fontSize: 16.0,
                   letterSpacing: 0.0,
                   fontWeight: FontWeight.w600,
@@ -70,7 +70,7 @@ class _TitleWithSubtitleWidgetState extends State<TitleWithSubtitleWidget> {
             'Test subtitle',
           ),
           style: FlutterFlowTheme.of(context).labelMedium.override(
-                fontFamily: 'Inter',
+                fontFamily: 'Sora',
                 letterSpacing: 0.0,
               ),
         ),

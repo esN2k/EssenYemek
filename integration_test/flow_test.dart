@@ -5,16 +5,17 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:integration_test/integration_test.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:essen_yemek/app_state.dart';
 import 'package:essen_yemek/flutter_flow/flutter_flow_theme.dart';
 import 'package:essen_yemek/flutter_flow/internationalization.dart';
-import 'package:essen_yemek/sayfalar/plan/plan_widget.dart';
+import 'package:essen_yemek/main.dart';
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   setUpAll(() async {
     GoogleFonts.config.allowRuntimeFetching = false;
@@ -35,7 +36,7 @@ void main() {
     FFAppState.reset();
   });
 
-  testWidgets('PlanWidget updates plan type on tap',
+  testWidgets('plan to orders navigation shows empty state',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       ChangeNotifierProvider(
@@ -54,18 +55,18 @@ void main() {
             Locale('en'),
           ],
           locale: Locale('en'),
-          home: Scaffold(
-            body: PlanWidget(),
-          ),
+          home: NavBarPage(initialPage: 'Plan'),
         ),
       ),
     );
 
     await tester.pumpAndSettle();
 
-    expect(FFAppState().planType, equals('Dengeli'));
-    await tester.tap(find.text('Vegan'));
-    await tester.pump();
-    expect(FFAppState().planType, equals('Vegan'));
+    expect(find.text('Your plan'), findsOneWidget);
+
+    await tester.tap(find.text('Orders'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Please sign in to view your orders.'), findsOneWidget);
   });
 }

@@ -1,5 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/plan_service.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -87,7 +90,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .labelLarge
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Sora',
                                       letterSpacing: 0.0,
                                     ),
                               ),
@@ -101,7 +104,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .displaySmall
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Sora',
                                       letterSpacing: 0.0,
                                     ),
                               ),
@@ -132,7 +135,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .titleMedium
                                             .override(
-                                              fontFamily: 'Inter',
+                                              fontFamily: 'Sora',
                                               letterSpacing: 0.0,
                                             ),
                                       ),
@@ -146,7 +149,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .labelLarge
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily: 'Sora',
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .info,
@@ -283,7 +286,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                                                 .bodyLarge
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Inter',
+                                                                      'Sora',
                                                                   letterSpacing:
                                                                       0.0,
                                                                 ),
@@ -364,7 +367,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                                               .of(context)
                                                           .bodyLarge
                                                           .override(
-                                                            fontFamily: 'Inter',
+                                                            fontFamily: 'Sora',
                                                             letterSpacing: 0.0,
                                                           ),
                                                     ),
@@ -459,7 +462,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                                                 .bodyLarge
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Inter',
+                                                                      'Sora',
                                                                   letterSpacing:
                                                                       0.0,
                                                                 ),
@@ -538,7 +541,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                                               .of(context)
                                                           .bodyLarge
                                                           .override(
-                                                            fontFamily: 'Inter',
+                                                            fontFamily: 'Sora',
                                                             letterSpacing: 0.0,
                                                           ),
                                                     ),
@@ -653,7 +656,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                                                 .bodyLarge
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Inter',
+                                                                      'Sora',
                                                                   letterSpacing:
                                                                       0.0,
                                                                 ),
@@ -778,7 +781,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                                               .bodyLarge
                                                               .override(
                                                                 fontFamily:
-                                                                    'Inter',
+                                                                    'Sora',
                                                                 letterSpacing:
                                                                     0.0,
                                                               ),
@@ -893,7 +896,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                                             .headlineSmall
                                                             .override(
                                                               fontFamily:
-                                                                  'Inter',
+                                                                  'Sora',
                                                               fontSize: 16.0,
                                                               letterSpacing:
                                                                   0.0,
@@ -927,6 +930,9 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                             GoRouter.of(context)
                                                 .prepareAuthEvent();
                                             await authManager.signOut();
+                                            PlanService.clearPlanState(
+                                              FFAppState(),
+                                            );
                                             GoRouter.of(context)
                                                 .clearRedirectLocation();
 
@@ -969,7 +975,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                                           context)
                                                       .bodyLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Sora',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),

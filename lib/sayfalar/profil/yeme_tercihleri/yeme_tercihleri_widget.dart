@@ -79,7 +79,7 @@ class _YemeTercihleriWidgetState extends State<YemeTercihleriWidget> {
                           style: FlutterFlowTheme.of(context)
                               .displaySmall
                               .override(
-                                fontFamily: 'Inter',
+                                fontFamily: 'Sora',
                                 letterSpacing: 0.0,
                               ),
                         ),
@@ -106,18 +106,10 @@ class _YemeTercihleriWidgetState extends State<YemeTercihleriWidget> {
                                 ),
                               );
                             }
-                            List<CompanyInformationRecord>
-                                columnCompanyInformationRecordList =
-                                snapshot.data!;
                             // Return an empty Container when the item does not exist.
                             if (snapshot.data!.isEmpty) {
                               return Container();
                             }
-                            final columnCompanyInformationRecord =
-                                columnCompanyInformationRecordList.isNotEmpty
-                                    ? columnCompanyInformationRecordList.first
-                                    : null;
-
                             return Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -189,7 +181,7 @@ class _YemeTercihleriWidgetState extends State<YemeTercihleriWidget> {
                                                           context)
                                                       .bodyLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Sora',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
@@ -275,7 +267,7 @@ class _YemeTercihleriWidgetState extends State<YemeTercihleriWidget> {
                                                           context)
                                                       .bodyLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Sora',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
@@ -361,7 +353,7 @@ class _YemeTercihleriWidgetState extends State<YemeTercihleriWidget> {
                                                           context)
                                                       .bodyLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Sora',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),

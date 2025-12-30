@@ -1,6 +1,5 @@
 import '/bilesenlercomp/loader_item/loader_item_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'meal_card_loading_model.dart';
 export 'meal_card_loading_model.dart';
@@ -40,11 +39,7 @@ class _MealCardLoadingWidgetState extends State<MealCardLoadingWidget> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        final loaderItems = List.generate(random_data.randomInteger(0, 0),
-                (index) => random_data.randomName(true, true))
-            .toList()
-            .take(4)
-            .toList();
+        final loaderItems = List.generate(4, (index) => index);
 
         return GridView.builder(
           padding: EdgeInsets.zero,
@@ -52,12 +47,11 @@ class _MealCardLoadingWidgetState extends State<MealCardLoadingWidget> {
             crossAxisCount: 2,
             crossAxisSpacing: 10.0,
             mainAxisSpacing: 10.0,
-            childAspectRatio: 0.79,
+            childAspectRatio: 0.68,
           ),
           scrollDirection: Axis.vertical,
           itemCount: loaderItems.length,
           itemBuilder: (context, loaderItemsIndex) {
-            final loaderItemsItem = loaderItems[loaderItemsIndex];
             return LoaderItemWidget(
               key: Key('Keyi8f_${loaderItemsIndex}_of_${loaderItems.length}'),
             );

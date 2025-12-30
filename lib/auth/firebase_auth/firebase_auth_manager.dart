@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../auth_manager.dart';
@@ -49,10 +49,6 @@ class FirebaseAuthManager extends AuthManager
         JwtSignInManager,
         GithubSignInManager,
         PhoneSignInManager {
-  // Set when using phone verification (after phone number is provided).
-  String? _phoneAuthVerificationCode;
-  // Set when using phone sign in in web mode (ignored otherwise).
-  ConfirmationResult? _webPhoneAuthConfirmationResult;
   FirebasePhoneAuthManager phoneAuthManager = FirebasePhoneAuthManager();
 
   @override
@@ -65,13 +61,16 @@ class FirebaseAuthManager extends AuthManager
   Future deleteUser(BuildContext context) async {
     try {
       if (!loggedIn) {
-        print('Error: delete user attempted with no logged in user!');
+        debugPrint('Error: delete user attempted with no logged in user!');
         return;
       }
       logFirebaseEvent("DELETE_USER");
       await currentUser?.delete();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
+        if (!context.mounted) {
+          return;
+        }
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -90,13 +89,16 @@ class FirebaseAuthManager extends AuthManager
   }) async {
     try {
       if (!loggedIn) {
-        print('Error: update email attempted with no logged in user!');
+        debugPrint('Error: update email attempted with no logged in user!');
         return;
       }
       await currentUser?.updateEmail(email);
       await updateUserDocument(email: email);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
+        if (!context.mounted) {
+          return;
+        }
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -115,12 +117,15 @@ class FirebaseAuthManager extends AuthManager
   }) async {
     try {
       if (!loggedIn) {
-        print('Error: update password attempted with no logged in user!');
+        debugPrint('Error: update password attempted with no logged in user!');
         return;
       }
       await currentUser?.updatePassword(newPassword);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
+        if (!context.mounted) {
+          return;
+        }
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -140,6 +145,9 @@ class FirebaseAuthManager extends AuthManager
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException {
+      if (!context.mounted) {
+        return null;
+      }
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -147,6 +155,9 @@ class FirebaseAuthManager extends AuthManager
           'sgqqgscx' /* Hata:  */,
         ))),
       );
+      return null;
+    }
+    if (!context.mounted) {
       return null;
     }
     ScaffoldMessenger.of(context).showSnackBar(
@@ -217,7 +228,6 @@ class FirebaseAuthManager extends AuthManager
         phoneAuthManager
             .update(() => phoneAuthManager.triggerOnCodeSent = false);
       } else if (phoneAuthManager.phoneAuthError != null) {
-        final e = phoneAuthManager.phoneAuthError!;
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(FFLocalizations.of(context).getText(
             'sgqqgscx' /* Hata:  */,
@@ -327,6 +337,9 @@ class FirebaseAuthManager extends AuthManager
           ? null
           : EssenYemekFirebaseUser.fromUserCredential(userCredential);
     } on FirebaseAuthException catch (e) {
+      if (!context.mounted) {
+        return null;
+      }
       final errorMsg = switch (e.code) {
         'email-already-in-use' => FFLocalizations.of(context).getText(
             'ix63qsna' /* Sağlanan kimlik doğrulama bilg... */,

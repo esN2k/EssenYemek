@@ -125,21 +125,21 @@ class LightModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary = const Color(0xFF86C144);
-  late Color secondary = const Color(0xFF426A20);
-  late Color tertiary = const Color(0xFFD5EEBA);
-  late Color alternate = const Color(0xFFE0E3E7);
-  late Color primaryText = const Color(0xFF272727);
-  late Color secondaryText = const Color(0xFF797979);
-  late Color primaryBackground = const Color(0xFFFFFFFF);
-  late Color secondaryBackground = const Color(0xFFF2F2F2);
-  late Color accent1 = const Color(0x4D86C144);
-  late Color accent2 = const Color(0x4C426A20);
-  late Color accent3 = const Color(0x7FD5EEBA);
-  late Color accent4 = const Color(0xB2E0E3E7);
-  late Color success = const Color(0xFF04A24C);
-  late Color warning = const Color(0x4CFF5963);
-  late Color error = const Color(0xFFFF5963);
+  late Color primary = const Color(0xFF21A36A);
+  late Color secondary = const Color(0xFF156B3B);
+  late Color tertiary = const Color(0xFFF0F7F1);
+  late Color alternate = const Color(0xFFE5DED4);
+  late Color primaryText = const Color(0xFF1B1B1B);
+  late Color secondaryText = const Color(0xFF6E6A63);
+  late Color primaryBackground = const Color(0xFFF9F6F0);
+  late Color secondaryBackground = const Color(0xFFFFFFFF);
+  late Color accent1 = const Color(0xFFDFF4E6);
+  late Color accent2 = const Color(0xFFF4ECDD);
+  late Color accent3 = const Color(0xFFFFF1D6);
+  late Color accent4 = const Color(0xFFEDE7DD);
+  late Color success = const Color(0xFF1E9E63);
+  late Color warning = const Color(0xFFF4A43F);
+  late Color error = const Color(0xFFE24D4D);
   late Color info = const Color(0xFFFFFFFF);
 }
 
@@ -181,110 +181,113 @@ class ThemeTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'Inter';
+  String get displayLargeFamily => 'Sora';
   TextStyle get displayLarge => GoogleFonts.getFont(
-        'Inter',
+        'Sora',
         color: theme.primaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 44.0,
+        fontWeight: FontWeight.w700,
+        fontSize: 42.0,
+        letterSpacing: -0.6,
       );
-  String get displayMediumFamily => 'Inter';
+  String get displayMediumFamily => 'Sora';
   TextStyle get displayMedium => GoogleFonts.getFont(
-        'Inter',
+        'Sora',
         color: theme.primaryText,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w700,
         fontSize: 36.0,
+        letterSpacing: -0.4,
       );
-  String get displaySmallFamily => 'Inter';
+  String get displaySmallFamily => 'Sora';
   TextStyle get displaySmall => GoogleFonts.getFont(
-        'Inter',
+        'Sora',
         color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 32.0,
+        fontWeight: FontWeight.w700,
+        fontSize: 30.0,
+        letterSpacing: -0.2,
       );
-  String get headlineLargeFamily => 'Inter';
+  String get headlineLargeFamily => 'Sora';
   TextStyle get headlineLarge => GoogleFonts.getFont(
-        'Inter',
+        'Sora',
         color: theme.primaryText,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w600,
         fontSize: 24.0,
       );
-  String get headlineMediumFamily => 'Inter';
+  String get headlineMediumFamily => 'Sora';
   TextStyle get headlineMedium => GoogleFonts.getFont(
-        'Inter',
+        'Sora',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 24.0,
+        fontSize: 22.0,
       );
-  String get headlineSmallFamily => 'Inter';
+  String get headlineSmallFamily => 'Sora';
   TextStyle get headlineSmall => GoogleFonts.getFont(
-        'Inter',
+        'Sora',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 22.0,
+        fontSize: 20.0,
       );
-  String get titleLargeFamily => 'Inter';
+  String get titleLargeFamily => 'Sora';
   TextStyle get titleLarge => GoogleFonts.getFont(
-        'Inter',
+        'Sora',
         color: theme.primaryText,
-        fontWeight: FontWeight.w500,
-        fontSize: 22.0,
+        fontWeight: FontWeight.w600,
+        fontSize: 20.0,
       );
-  String get titleMediumFamily => 'Inter';
+  String get titleMediumFamily => 'Sora';
   TextStyle get titleMedium => GoogleFonts.getFont(
-        'Inter',
-        color: theme.info,
+        'Sora',
+        color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18.0,
       );
-  String get titleSmallFamily => 'Inter';
+  String get titleSmallFamily => 'Sora';
   TextStyle get titleSmall => GoogleFonts.getFont(
-        'Inter',
-        color: theme.info,
+        'Sora',
+        color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Inter';
+  String get labelLargeFamily => 'Sora';
   TextStyle get labelLarge => GoogleFonts.getFont(
-        'Inter',
+        'Sora',
         color: theme.secondaryText,
         fontWeight: FontWeight.w500,
         fontSize: 14.0,
       );
-  String get labelMediumFamily => 'Inter';
+  String get labelMediumFamily => 'Sora';
   TextStyle get labelMedium => GoogleFonts.getFont(
-        'Inter',
+        'Sora',
         color: theme.secondaryText,
         fontWeight: FontWeight.w500,
         fontSize: 12.0,
       );
-  String get labelSmallFamily => 'Inter';
+  String get labelSmallFamily => 'Sora';
   TextStyle get labelSmall => GoogleFonts.getFont(
-        'Inter',
+        'Sora',
         color: theme.secondaryText,
         fontWeight: FontWeight.w500,
         fontSize: 11.0,
       );
-  String get bodyLargeFamily => 'Inter';
+  String get bodyLargeFamily => 'Sora';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Inter',
+        'Sora',
         color: theme.primaryText,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Inter';
+  String get bodyMediumFamily => 'Sora';
   TextStyle get bodyMedium => GoogleFonts.getFont(
-        'Inter',
+        'Sora',
         color: theme.primaryText,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Inter';
+  String get bodySmallFamily => 'Sora';
   TextStyle get bodySmall => GoogleFonts.getFont(
-        'Inter',
+        'Sora',
         color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 14.0,
+        fontWeight: FontWeight.w500,
+        fontSize: 13.0,
       );
 }
 
@@ -296,21 +299,21 @@ class DarkModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary = const Color(0xFF86C144);
-  late Color secondary = const Color(0xFF426A20);
-  late Color tertiary = const Color(0xFFD5EEBA);
-  late Color alternate = const Color(0xFF22282F);
-  late Color primaryText = const Color(0xFFFFFFFF);
-  late Color secondaryText = const Color(0xFF999999);
-  late Color primaryBackground = const Color(0xFF171717);
-  late Color secondaryBackground = const Color(0xFF1F1F1F);
-  late Color accent1 = const Color(0x4D86C144);
-  late Color accent2 = const Color(0x4C426A20);
-  late Color accent3 = const Color(0x7FD5EEBA);
-  late Color accent4 = const Color(0xB322282F);
-  late Color success = const Color(0xFF04A24C);
-  late Color warning = const Color(0x4DFF5963);
-  late Color error = const Color(0xFFFF5963);
+  late Color primary = const Color(0xFF21A36A);
+  late Color secondary = const Color(0xFF1C7C4A);
+  late Color tertiary = const Color(0xFF143226);
+  late Color alternate = const Color(0xFF2A2E33);
+  late Color primaryText = const Color(0xFFF3F0EA);
+  late Color secondaryText = const Color(0xFFB5B0A8);
+  late Color primaryBackground = const Color(0xFF121412);
+  late Color secondaryBackground = const Color(0xFF1B1F1B);
+  late Color accent1 = const Color(0xFF2C4A3A);
+  late Color accent2 = const Color(0xFF332D24);
+  late Color accent3 = const Color(0xFF3B2E21);
+  late Color accent4 = const Color(0xFF2A2F33);
+  late Color success = const Color(0xFF1E9E63);
+  late Color warning = const Color(0xFFF4A43F);
+  late Color error = const Color(0xFFE24D4D);
   late Color info = const Color(0xFFFFFFFF);
 }
 

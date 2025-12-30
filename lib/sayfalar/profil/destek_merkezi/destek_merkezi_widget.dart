@@ -79,7 +79,7 @@ class _DestekMerkeziWidgetState extends State<DestekMerkeziWidget> {
                           style: FlutterFlowTheme.of(context)
                               .displaySmall
                               .override(
-                                fontFamily: 'Inter',
+                                fontFamily: 'Sora',
                                 letterSpacing: 0.0,
                               ),
                         ),

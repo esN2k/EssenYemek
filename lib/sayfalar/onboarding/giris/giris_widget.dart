@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/components/custom_appbar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -114,7 +116,7 @@ class _GirisWidgetState extends State<GirisWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .displaySmall
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Sora',
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -143,7 +145,7 @@ class _GirisWidgetState extends State<GirisWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily: 'Sora',
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w600,
                                               ),
@@ -199,7 +201,7 @@ class _GirisWidgetState extends State<GirisWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Inter',
+                                              fontFamily: 'Sora',
                                               fontSize: 16.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,
@@ -236,7 +238,7 @@ class _GirisWidgetState extends State<GirisWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily: 'Sora',
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w600,
                                               ),
@@ -310,7 +312,7 @@ class _GirisWidgetState extends State<GirisWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Inter',
+                                              fontFamily: 'Sora',
                                               fontSize: 16.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,
@@ -366,7 +368,7 @@ class _GirisWidgetState extends State<GirisWidget> {
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Sora',
                                       letterSpacing: 0.0,
                                     ),
                                 elevation: 0.0,
@@ -407,7 +409,7 @@ class _GirisWidgetState extends State<GirisWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodySmall
                                           .override(
-                                            fontFamily: 'Inter',
+                                            fontFamily: 'Sora',
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -454,7 +456,7 @@ class _GirisWidgetState extends State<GirisWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .labelLarge
                                       .override(
-                                        fontFamily: 'Inter',
+                                        fontFamily: 'Sora',
                                         letterSpacing: 0.0,
                                       ),
                                 ),
@@ -481,7 +483,7 @@ class _GirisWidgetState extends State<GirisWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Inter',
+                                        fontFamily: 'Sora',
                                         letterSpacing: 0.0,
                                       ),
                                   elevation: 0.0,

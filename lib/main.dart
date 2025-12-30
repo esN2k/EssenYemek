@@ -1,3 +1,7 @@
+// ignore_for_file: library_private_types_in_public_api
+
+import 'dart:async';
+
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +10,9 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'auth/firebase_auth/auth_util.dart';
 
+import 'backend/backend.dart';
 import 'backend/firebase/firebase_config.dart';
+import 'backend/plan_service.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
@@ -53,7 +59,8 @@ class _MyAppState extends State<MyApp> {
 
   late Stream<BaseAuthUser> userStream;
 
-  final authUserSub = authenticatedUserStream.listen((_) {});
+  late StreamSubscription<UsersRecord?> authUserSub;
+  StreamSubscription<PlansRecord?>? planSub;
 
   @override
   void initState() {
@@ -66,6 +73,26 @@ class _MyAppState extends State<MyApp> {
         _appStateNotifier.update(user);
       });
     jwtTokenStream.listen((_) {});
+    authUserSub = authenticatedUserStream.listen((userDoc) async {
+      if (userDoc == null) {
+        await planSub?.cancel();
+        PlanService.clearPlanState(FFAppState());
+        return;
+      }
+      final userRef = userDoc.reference;
+      await PlanService.ensurePlan(userRef);
+      final plan = await PlanService.fetchPlan(userRef);
+      if (plan != null) {
+        PlanService.applyPlanToState(state: FFAppState(), plan: plan);
+      }
+      await planSub?.cancel();
+      planSub = PlanService.streamPlan(userRef).listen((plan) {
+        if (plan == null) {
+          return;
+        }
+        PlanService.applyPlanToState(state: FFAppState(), plan: plan);
+      });
+    });
     Future.delayed(
       const Duration(milliseconds: 1000),
       () => _appStateNotifier.stopShowingSplashImage(),
@@ -75,6 +102,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void dispose() {
     authUserSub.cancel();
+    planSub?.cancel();
 
     super.dispose();
   }
@@ -146,6 +174,8 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'Panel': const PanelWidget(),
+      'Plan': const PlanWidget(),
+      'Siparisler': const SiparislerWidget(),
       'Profil': const ProfilWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -167,11 +197,38 @@ class _NavBarPageState extends State<NavBarPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: const Icon(
-              Icons.restaurant_sharp,
+              Icons.restaurant_rounded,
               size: 24.0,
             ),
-            label: FFLocalizations.of(context).getText(
-              '8hmmat3d' /* Yemekler */,
+            label: FFLocalizations.of(context).getVariableText(
+              trText: 'Ke\u015ffet',
+              enText: 'Explore',
+            ),
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(
+              Icons.event_note_rounded,
+              size: 24.0,
+            ),
+            label: FFLocalizations.of(context).getVariableText(
+              trText: 'Plan',
+              enText: 'Plan',
+            ),
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(
+              Icons.local_shipping_outlined,
+              size: 24.0,
+            ),
+            activeIcon: const Icon(
+              Icons.local_shipping_rounded,
+              size: 24.0,
+            ),
+            label: FFLocalizations.of(context).getVariableText(
+              trText: 'Sipari\u015fler',
+              enText: 'Orders',
             ),
             tooltip: '',
           ),

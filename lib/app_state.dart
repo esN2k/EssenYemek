@@ -1,3 +1,6 @@
+// ignore_for_file: unnecessary_getters_setters
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class FFAppState extends ChangeNotifier {
@@ -18,6 +21,52 @@ class FFAppState extends ChangeNotifier {
   void update(VoidCallback callback) {
     callback();
     notifyListeners();
+  }
+
+  void clearPlanData() {
+    _planType = 'Dengeli';
+    _planMealsPerWeek = 4;
+    _planServings = 2;
+    _planDeliveryDay = 'Sal\u0131';
+    _planMeals = [];
+  }
+
+  String _planType = 'Dengeli';
+  String get planType => _planType;
+  set planType(String value) {
+    _planType = value;
+  }
+
+  int _planMealsPerWeek = 4;
+  int get planMealsPerWeek => _planMealsPerWeek;
+  set planMealsPerWeek(int value) {
+    _planMealsPerWeek = value;
+  }
+
+  int _planServings = 2;
+  int get planServings => _planServings;
+  set planServings(int value) {
+    _planServings = value;
+  }
+
+  String _planDeliveryDay = 'Sal\u0131';
+  String get planDeliveryDay => _planDeliveryDay;
+  set planDeliveryDay(String value) {
+    _planDeliveryDay = value;
+  }
+
+  List<DocumentReference> _planMeals = [];
+  List<DocumentReference> get planMeals => _planMeals;
+  set planMeals(List<DocumentReference> value) {
+    _planMeals = value;
+  }
+
+  void addToPlanMeals(DocumentReference value) {
+    planMeals.add(value);
+  }
+
+  void removeFromPlanMeals(DocumentReference value) {
+    planMeals.remove(value);
   }
 
   String _userDiet = '';

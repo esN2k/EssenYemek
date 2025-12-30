@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/bilesenlercomp/diet_item/diet_item_widget.dart';
@@ -172,7 +174,7 @@ class _TercihleriDuzenleWidgetState extends State<TercihleriDuzenleWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .displaySmall
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Sora',
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -249,7 +251,7 @@ class _TercihleriDuzenleWidgetState extends State<TercihleriDuzenleWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .displaySmall
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Sora',
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -357,7 +359,7 @@ class _TercihleriDuzenleWidgetState extends State<TercihleriDuzenleWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .displaySmall
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Sora',
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -496,7 +498,7 @@ class _TercihleriDuzenleWidgetState extends State<TercihleriDuzenleWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Sora',
                                   letterSpacing: 0.0,
                                 ),
                             elevation: 0.0,

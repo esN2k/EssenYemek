@@ -79,7 +79,7 @@ class _DietItemWidgetState extends State<DietItemWidget> {
                   'diyetTürü',
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Inter',
+                      fontFamily: 'Sora',
                       color: widget.selectedDiet == widget.dietType
                           ? FlutterFlowTheme.of(context).primaryBackground
                           : FlutterFlowTheme.of(context).primaryText,
@@ -95,7 +95,7 @@ class _DietItemWidgetState extends State<DietItemWidget> {
                     'diyetTagline',
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Inter',
+                        fontFamily: 'Sora',
                         color: FlutterFlowTheme.of(context).primaryBackground,
                         fontSize: 12.0,
                         letterSpacing: 0.0,

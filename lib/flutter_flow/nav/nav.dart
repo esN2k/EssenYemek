@@ -113,6 +113,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   : const PanelWidget(),
             ),
             FFRoute(
+              name: 'Plan',
+              path: 'plan',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'Plan')
+                  : const PlanWidget(),
+            ),
+            FFRoute(
+              name: 'Siparisler',
+              path: 'siparisler',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'Siparisler')
+                  : const SiparislerWidget(),
+            ),
+            FFRoute(
               name: 'YemekDetaylar',
               path: 'meal/:mealRef',
               requireAuth: true,

@@ -63,8 +63,30 @@ class _MealCardWidgetState extends State<MealCardWidget>
     super.dispose();
   }
 
+  Future<void> _toggleFavorite() async {
+    if (widget.mealRef == null || currentUserReference == null) {
+      return;
+    }
+    final isFavorite =
+        widget.mealRef!.mealFavorites.contains(currentUserReference);
+    await widget.mealRef!.reference.update({
+      ...mapToFirestore(
+        {
+          'meal_favorites': isFavorite
+              ? FieldValue.arrayRemove([currentUserReference])
+              : FieldValue.arrayUnion([currentUserReference]),
+        },
+      ),
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final theme = FlutterFlowTheme.of(context);
+    final meal = widget.mealRef;
+    final isFavorite =
+        meal?.mealFavorites.contains(currentUserReference) ?? false;
+
     return InkWell(
       splashColor: Colors.transparent,
       focusColor: Colors.transparent,
@@ -89,223 +111,171 @@ class _MealCardWidgetState extends State<MealCardWidget>
           },
         );
       },
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () async {
-              logFirebaseEvent('MEAL_CARD_COMP_Container_xsjr6r56_ON_TAP');
-              logFirebaseEvent('Container_haptic_feedback');
-              HapticFeedback.lightImpact();
-              logFirebaseEvent('Container_navigate_to');
-
-              context.pushNamed(
-                'YemekDetaylar',
-                pathParameters: {
-                  'mealRef': serializeParam(
-                    widget.mealRef,
-                    ParamType.Document,
-                  ),
-                }.withoutNulls,
-                extra: <String, dynamic>{
-                  'mealRef': widget.mealRef,
-                },
-              );
-            },
-            onDoubleTap: () async {
-              logFirebaseEvent('MEAL_CARD_Container_xsjr6r56_ON_DOUBLE_T');
-              if (widget.mealRef!.mealFavorites
-                  .contains(currentUserReference)) {
-                logFirebaseEvent('Container_haptic_feedback');
-                HapticFeedback.lightImpact();
-                logFirebaseEvent('Container_backend_call');
-
-                await widget.mealRef!.reference.update({
-                  ...mapToFirestore(
-                    {
-                      'meal_favorites':
-                          FieldValue.arrayRemove([currentUserReference]),
-                    },
-                  ),
-                });
-              } else {
-                logFirebaseEvent('Container_haptic_feedback');
-                HapticFeedback.selectionClick();
-                logFirebaseEvent('Container_wait__delay');
-                await Future.delayed(const Duration(milliseconds: 100));
-                logFirebaseEvent('Container_haptic_feedback');
-                HapticFeedback.lightImpact();
-                logFirebaseEvent('Container_backend_call');
-
-                await widget.mealRef!.reference.update({
-                  ...mapToFirestore(
-                    {
-                      'meal_favorites':
-                          FieldValue.arrayUnion([currentUserReference]),
-                    },
-                  ),
-                });
-              }
-            },
-            child: Container(
-              width: MediaQuery.sizeOf(context).width * 0.48,
-              height: 150.0,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: Image.network(
-                    valueOrDefault<String>(
-                      widget.mealRef?.mealImage,
-                      'https://cdn-uploads.mealime.com/uploads/recipe/thumbnail/225/presentation_62aa6b6f-6a95-4798-9091-09f487ad2dc4.jpg',
+      onDoubleTap: () async {
+        logFirebaseEvent('MEAL_CARD_Container_xsjr6r56_ON_DOUBLE_T');
+        logFirebaseEvent('Container_haptic_feedback');
+        HapticFeedback.selectionClick();
+        await _toggleFavorite();
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: theme.secondaryBackground,
+          borderRadius: BorderRadius.circular(22.0),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 18.0,
+              color: theme.primaryText.withAlpha(20),
+              offset: const Offset(0.0, 10.0),
+            ),
+          ],
+          border: Border.all(
+            color: theme.accent4,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(22.0),
+                      topRight: Radius.circular(22.0),
                     ),
-                  ).image,
-                ),
-                borderRadius: BorderRadius.circular(24.0),
-                border: Border.all(
-                  color: FlutterFlowTheme.of(context).alternate,
-                  width: 1.0,
-                ),
-              ),
-              child: Align(
-                alignment: const AlignmentDirectional(1.0, -1.0),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 12.0, 0.0),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      logFirebaseEvent('MEAL_CARD_COMP_Stack_83960l4l_ON_TAP');
-                      if (widget.mealRef!.mealFavorites
-                          .contains(currentUserReference)) {
-                        logFirebaseEvent('Stack_haptic_feedback');
-                        HapticFeedback.lightImpact();
-                        logFirebaseEvent('Stack_backend_call');
-
-                        await widget.mealRef!.reference.update({
-                          ...mapToFirestore(
-                            {
-                              'meal_favorites': FieldValue.arrayRemove(
-                                  [currentUserReference]),
-                            },
-                          ),
-                        });
-                      } else {
-                        logFirebaseEvent('Stack_haptic_feedback');
-                        HapticFeedback.selectionClick();
-                        logFirebaseEvent('Stack_wait__delay');
-                        await Future.delayed(const Duration(milliseconds: 100));
-                        logFirebaseEvent('Stack_haptic_feedback');
-                        HapticFeedback.lightImpact();
-                        logFirebaseEvent('Stack_backend_call');
-
-                        await widget.mealRef!.reference.update({
-                          ...mapToFirestore(
-                            {
-                              'meal_favorites':
-                                  FieldValue.arrayUnion([currentUserReference]),
-                            },
-                          ),
-                        });
-                      }
-                    },
-                    child: SizedBox(
-                      width: 32.0,
-                      height: 32.0,
-                      child: Stack(
-                        children: [
-                          Align(
-                            alignment: const AlignmentDirectional(1.0, -1.0),
-                            child: Icon(
-                              Icons.favorite_border_rounded,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 32.0,
-                            ),
-                          ),
-                          if (widget.mealRef?.mealFavorites
-                                  .contains(currentUserReference) ??
-                              true)
-                            Align(
-                              alignment: const AlignmentDirectional(1.0, -1.0),
-                              child: const Icon(
-                                Icons.favorite_rounded,
-                                color: Color(0xFFFF4E59),
-                                size: 32.0,
-                              ).animateOnPageLoad(
-                                  animationsMap['iconOnPageLoadAnimation']!),
-                            ),
-                        ],
+                    child: Image.network(
+                      valueOrDefault<String>(
+                        meal?.mealImage,
+                        'https://cdn-uploads.mealime.com/uploads/recipe/thumbnail/225/presentation_62aa6b6f-6a95-4798-9091-09f487ad2dc4.jpg',
+                      ),
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.transparent,
+                            theme.primaryText.withAlpha(153),
+                          ],
+                          begin: const AlignmentDirectional(0.0, -0.6),
+                          end: const AlignmentDirectional(0.0, 1.0),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-            child: Text(
-              valueOrDefault<String>(
-                widget.mealRef?.mealName,
-                'yemek_adı',
-              ).maybeHandleOverflow(
-                maxChars: 36,
-                replacement: '…',
-              ),
-              maxLines: 2,
-              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily: 'Inter',
-                    letterSpacing: 0.0,
+                  Positioned(
+                    top: 10.0,
+                    right: 10.0,
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        logFirebaseEvent('MEAL_CARD_COMP_Stack_83960l4l_ON_TAP');
+                        logFirebaseEvent('Stack_haptic_feedback');
+                        HapticFeedback.selectionClick();
+                        await _toggleFavorite();
+                      },
+                      child: Container(
+                        width: 34.0,
+                        height: 34.0,
+                        decoration: BoxDecoration(
+                          color: theme.secondaryBackground.withAlpha(230),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Icon(
+                            isFavorite
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_border_rounded,
+                            color: isFavorite
+                                ? const Color(0xFFFF4E59)
+                                : theme.secondaryText,
+                            size: 18.0,
+                          ).animateOnPageLoad(
+                              animationsMap['iconOnPageLoadAnimation']!),
+                        ),
+                      ),
+                    ),
                   ),
-            ),
-          ),
-          if (widget.mealRef!.mealDiet.isNotEmpty)
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).accent1,
-                  borderRadius: BorderRadius.circular(24.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 6.0, 8.0, 6.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Align(
-                        alignment: const AlignmentDirectional(0.0, 0.0),
-                        child: AuthUserStreamWidget(
-                          builder: (context) => Text(
-                            valueOrDefault<String>(
-                              valueOrDefault(currentUserDocument?.diet, ''),
-                              'diyet',
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Inter',
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  fontSize: 10.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                  lineHeight: 1.0,
-                                ),
+                  if (meal?.mealCalories != null && meal!.mealCalories != 0)
+                    Positioned(
+                      left: 10.0,
+                      bottom: 10.0,
+                      child: Container(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            10.0, 6.0, 10.0, 6.0),
+                        decoration: BoxDecoration(
+                          color: theme.secondaryBackground.withAlpha(235),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Text(
+                          '${meal.mealCalories} kalori',
+                          style: theme.labelSmall.override(
+                            fontFamily: 'Sora',
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+                ],
               ),
             ),
-        ],
+            Padding(
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    valueOrDefault<String>(
+                      meal?.mealName,
+                      'Yemek',
+                    ).maybeHandleOverflow(
+                      maxChars: 40,
+                      replacement: '...',
+                    ),
+                    maxLines: 2,
+                    style: theme.bodyMedium.override(
+                      fontFamily: 'Sora',
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  if (meal?.mealDiet.isNotEmpty ?? false)
+                    Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 8.0, 0.0, 0.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: theme.accent1,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            10.0, 6.0, 10.0, 6.0),
+                        child: Text(
+                          meal!.mealDiet.first,
+                          style: theme.labelSmall.override(
+                            fontFamily: 'Sora',
+                            color: theme.primary,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

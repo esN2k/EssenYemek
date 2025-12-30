@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/bilesenlercomp/title_with_subtitle/title_with_subtitle_widget.dart';
@@ -107,7 +109,7 @@ class _ProfiliDuzenleWidgetState extends State<ProfiliDuzenleWidget> {
                           style: FlutterFlowTheme.of(context)
                               .displaySmall
                               .override(
-                                fontFamily: 'Inter',
+                                fontFamily: 'Sora',
                                 letterSpacing: 0.0,
                               ),
                         ),
@@ -133,7 +135,7 @@ class _ProfiliDuzenleWidgetState extends State<ProfiliDuzenleWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyLarge
                                         .override(
-                                          fontFamily: 'Inter',
+                                          fontFamily: 'Sora',
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -207,7 +209,7 @@ class _ProfiliDuzenleWidgetState extends State<ProfiliDuzenleWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Inter',
+                                            fontFamily: 'Sora',
                                             fontSize: 16.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w500,
@@ -276,7 +278,7 @@ class _ProfiliDuzenleWidgetState extends State<ProfiliDuzenleWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Sora',
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
                                   letterSpacing: 0.0,
@@ -335,7 +337,7 @@ class _ProfiliDuzenleWidgetState extends State<ProfiliDuzenleWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Sora',
                                   color: const Color(0xFFB74D4D),
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
@@ -364,7 +366,7 @@ class _ProfiliDuzenleWidgetState extends State<ProfiliDuzenleWidget> {
                           focusedErrorBorder: InputBorder.none,
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
+                              fontFamily: 'Sora',
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
                               fontSize: 1.0,
