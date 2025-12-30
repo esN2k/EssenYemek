@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../../auth/firebase_auth/auth_util.dart';
@@ -8,11 +9,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 const kMaxEventNameLength = 40;
 const kMaxParameterLength = 100;
 
+bool _shouldLogAnalytics() {
+  if (kIsWeb && !kReleaseMode) {
+    return false;
+  }
+  return true;
+}
+
 void logFirebaseEvent(String eventName, {Map<String?, dynamic>? parameters}) {
   // https://firebase.google.com/docs/reference/cpp/group/event-names
   assert(eventName.length <= kMaxEventNameLength);
 
   if (Firebase.apps.isEmpty) {
+    return;
+  }
+
+  if (!_shouldLogAnalytics()) {
     return;
   }
 

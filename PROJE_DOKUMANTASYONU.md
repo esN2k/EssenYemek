@@ -15,8 +15,9 @@ Kullanıcılar haftalık yemek planı oluşturur, seçimlerini planlar ve sipari
    flutter pub get
    ```
 4. **Firebase yapılandırması:**
-   - `google-services.json`’u (Android) ve `GoogleService-Info.plist`’i (iOS) ilgili dizinlere ekle.
-   - Web için `firebase_config.dart`’ı ayarla.
+   - `flutterfire configure --project=<firebase_project_id> --platforms=android,ios,web` çalıştır.
+   - Komut şu dosyaları üretir: `lib/firebase_options.dart`, `android/app/google-services.json`, `ios/Runner/GoogleService-Info.plist`.
+   - Bu dosyalar repoda tutulmuyor; lokal olarak sakla.
 
 ## Bağımlılıklar
 - `cloud_firestore`, `firebase_auth`, `firebase_core`
