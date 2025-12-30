@@ -41,7 +41,8 @@ service cloud.firestore {
     }
 
     match /company_information/{document} {
-      allow create: if false;
+      allow create: if document == 'default' &&
+          !exists(/databases/$(database)/documents/company_information/default);
       allow read: if true;
       allow write: if false;
       allow delete: if false;
