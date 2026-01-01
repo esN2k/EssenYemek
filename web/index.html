@@ -50,6 +50,34 @@
   <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#86c144">
 
   <link rel="manifest" href="manifest.json">
+
+  <!-- Firebase SDK for Web - Compat version for Flutter compatibility -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+
+  <script>
+    // Initialize Firebase immediately when SDK loads
+    if (typeof firebase !== 'undefined' && firebase.app) {
+      try {
+        const firebaseConfig = {
+          apiKey: "AIzaSyD204iBrFAvNuZFOfY7uhCq5dBO2RZHHy4",
+          appId: "1:1035153418038:web:b157c250aa32dd5a523597",
+          messagingSenderId: "1035153418038",
+          projectId: "essenyemek-db65c",
+          authDomain: "essenyemek-db65c.firebaseapp.com",
+          storageBucket: "essenyemek-db65c.firebasestorage.app",
+          measurementId: "G-37ZN59NZ1M"
+        };
+        if (!firebase.apps || firebase.apps.length === 0) {
+          firebase.initializeApp(firebaseConfig);
+        }
+      } catch(e) {
+        console.warn('Firebase already initialized or error:', e);
+      }
+    }
+  </script>
   
 </head>
 <body>
