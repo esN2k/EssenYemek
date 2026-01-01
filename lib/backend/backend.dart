@@ -31,6 +31,8 @@ export 'schema/support_center_record.dart';
 export 'schema/plans_record.dart';
 export 'schema/orders_record.dart';
 
+export 'meal_service.dart';
+
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
   Query Function(Query)? queryBuilder,
