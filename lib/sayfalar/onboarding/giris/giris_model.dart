@@ -22,7 +22,7 @@ class GirisModel extends FlutterFlowModel<GirisWidget> {
     }
 
     if (!RegExp(kTextValidatorEmailRegex).hasMatch(val)) {
-      return 'Has to be a valid email address.';
+      return 'Geçerli bir e-posta adresi olmalıdır.';
     }
     return null;
   }
