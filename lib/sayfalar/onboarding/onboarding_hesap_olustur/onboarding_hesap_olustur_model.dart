@@ -37,7 +37,7 @@ class OnboardingHesapOlusturModel
     }
 
     if (!RegExp(kTextValidatorEmailRegex).hasMatch(val)) {
-      return 'Has to be a valid email address.';
+      return 'Geçerli bir e-posta adresi olmalıdır.';
     }
     return null;
   }
@@ -52,6 +52,10 @@ class OnboardingHesapOlusturModel
       return FFLocalizations.of(context).getText(
         'dtyrqbhc' /* Password is required. */,
       );
+    }
+
+    if (val.length < 6) {
+      return 'Şifre en az 6 karakter olmalıdır.';
     }
 
     return null;

@@ -46,17 +46,6 @@ class _GirisWidgetState extends State<GirisWidget> {
 
     _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {
-          _model.emailAddressTextController?.text =
-              FFLocalizations.of(context).getText(
-            'enkcecei' /* dodikbalaman@gmail.com */,
-          );
-          _model.passwordTextController?.text =
-              FFLocalizations.of(context).getText(
-            'lhxezft7' /* 123456 */,
-          );
-        }));
   }
 
   @override
@@ -338,6 +327,11 @@ class _GirisWidgetState extends State<GirisWidget> {
                               onPressed: () async {
                                 logFirebaseEvent(
                                     'GIRIS_PAGE_GIRI_YAP_BTN_ON_TAP');
+                                logFirebaseEvent('Button_validate_form');
+                                if (_model.formKey.currentState == null ||
+                                    !_model.formKey.currentState!.validate()) {
+                                  return;
+                                }
                                 logFirebaseEvent('Button_haptic_feedback');
                                 HapticFeedback.lightImpact();
                                 logFirebaseEvent('Button_auth');
