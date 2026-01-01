@@ -347,6 +347,15 @@ class FirebaseAuthManager extends AuthManager
         'INVALID_LOGIN_CREDENTIALS' => FFLocalizations.of(context).getText(
             'zikarxs8' /* Sağlanan kimlik doğrulama bilg... */,
           ),
+        'invalid-email' => 'Geçersiz e-posta adresi.',
+        'user-disabled' => 'Bu hesap devre dışı bırakılmış.',
+        'user-not-found' => 'Bu e-posta ile kayıtlı kullanıcı bulunamadı.',
+        'wrong-password' => 'Yanlış şifre. Lütfen tekrar deneyin.',
+        'invalid-credential' => 'Geçersiz kimlik bilgileri. Lütfen kontrol edin.',
+        'weak-password' => 'Şifre çok zayıf. En az 6 karakter kullanın.',
+        'operation-not-allowed' => 'Bu işlem şu anda kullanılamıyor.',
+        'too-many-requests' => 'Çok fazla deneme yapıldı. Lütfen daha sonra tekrar deneyin.',
+        'network-request-failed' => 'Ağ hatası. İnternet bağlantınızı kontrol edin.',
         _ => FFLocalizations.of(context).getText(
             'sgqqgscx' /* Hata:  */,
           ),

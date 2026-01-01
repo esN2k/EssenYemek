@@ -54,6 +54,10 @@ class OnboardingHesapOlusturModel
       );
     }
 
+    if (val.length < 6) {
+      return 'Şifre en az 6 karakter olmalıdır.';
+    }
+
     return null;
   }
 
