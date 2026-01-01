@@ -134,8 +134,10 @@ class _MealCardWidgetState extends State<MealCardWidget>
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Expanded(
+            AspectRatio(
+              aspectRatio: 1.0,
               child: Stack(
                 children: [
                   ClipRRect(
@@ -176,7 +178,8 @@ class _MealCardWidgetState extends State<MealCardWidget>
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        logFirebaseEvent('MEAL_CARD_COMP_Stack_83960l4l_ON_TAP');
+                        logFirebaseEvent(
+                            'MEAL_CARD_COMP_Stack_83960l4l_ON_TAP');
                         logFirebaseEvent('Stack_haptic_feedback');
                         HapticFeedback.selectionClick();
                         await _toggleFavorite();

@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:logger/logger.dart';
 
 import '../base_auth_user_provider.dart';
 
 export '../base_auth_user_provider.dart';
+
+final _logger = Logger();
 
 class EssenYemekFirebaseUser extends BaseAuthUser {
   EssenYemekFirebaseUser(this.user);
@@ -59,14 +62,27 @@ class EssenYemekFirebaseUser extends BaseAuthUser {
       EssenYemekFirebaseUser(user);
 }
 
-Stream<BaseAuthUser> essenYemekFirebaseUserStream() => FirebaseAuth.instance
+Stream<BaseAuthUser> essenYemekFirebaseUserStream() {
+  try {
+    return FirebaseAuth.instance
         .authStateChanges()
+        .handleError((error) {
+          _logger.e('Firebase Auth stream error: $error');
+          // Return null user on error - user is logged out
+        })
         .debounce((user) => user == null && !loggedIn
             ? TimerStream(true, const Duration(seconds: 1))
             : Stream.value(user))
         .map<BaseAuthUser>(
-      (user) {
-        currentUser = EssenYemekFirebaseUser(user);
-        return currentUser!;
-      },
-    );
+          (user) {
+            currentUser = EssenYemekFirebaseUser(user);
+            return currentUser!;
+          },
+        );
+  } catch (e) {
+    _logger.e('Failed to create auth stream: $e');
+    // Return empty stream with logged out user
+    currentUser = EssenYemekFirebaseUser(null);
+    return Stream.value(currentUser!);
+  }
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -8,86 +8,32 @@
     The path provided below has to start and end with a slash "/" in order for
     it to work correctly.
 
-    Alternatively, build your application passing the --base-href parameter
-    specifying the new root path of your web app.
-
-    Fore more details:
+    For more details:
     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
   -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Essen Yemek - Yemek Sipariş Uygulaması">
 
   <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="EssenYemek">
-
-  
-
-  <meta name="robots" content="noindex" />
+  <meta name="apple-mobile-web-app-title" content="essen_yemek">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <!-- Open Graph & SEO tags -->
-  <meta property="og:title" content="EssenYemek" />
-  <meta property="og:description" content="EssenYemek" />
-  <meta property="og:image" content="/assets/assets/images/Gemini_Generated_Image_2rm6c82rm6c82rm6.jpeg" /> 
-  <meta name="twitter:title" content="EssenYemek" />
-  <meta name="twitter:description" content="EssenYemek" />
-  <meta name="twitter:image" content="/assets/assets/images/Gemini_Generated_Image_2rm6c82rm6c82rm6.jpeg" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <title> EssenYemek </title>
-  <meta name="description" content="EssenYemek" />
-    
-
-  <!-- Status Bar color in Safari browser (iOS) and PWA -->
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#86c144">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#86c144">
-
+  <title>essen_yemek</title>
   <link rel="manifest" href="manifest.json">
-
-  <!-- Firebase SDK for Web - Compat version for Flutter compatibility -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
-
-  <script>
-    // Initialize Firebase immediately when SDK loads
-    if (typeof firebase !== 'undefined' && firebase.app) {
-      try {
-        const firebaseConfig = {
-          apiKey: "AIzaSyD204iBrFAvNuZFOfY7uhCq5dBO2RZHHy4",
-          appId: "1:1035153418038:web:b157c250aa32dd5a523597",
-          messagingSenderId: "1035153418038",
-          projectId: "essenyemek-db65c",
-          authDomain: "essenyemek-db65c.firebaseapp.com",
-          storageBucket: "essenyemek-db65c.firebasestorage.app",
-          measurementId: "G-37ZN59NZ1M"
-        };
-        if (!firebase.apps || firebase.apps.length === 0) {
-          firebase.initializeApp(firebaseConfig);
-        }
-      } catch(e) {
-        console.warn('Firebase already initialized or error:', e);
-      }
-    }
-  </script>
-  
 </head>
 <body>
-  
-  
-  
-  
-  
-  <script>
-    {{flutter_bootstrap_js}}
-  </script>
+  <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

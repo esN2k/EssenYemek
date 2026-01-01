@@ -399,6 +399,12 @@ class FirebaseAuthManager extends AuthManager
         case 'operation-not-allowed':
           errorMsg = 'Bu giriş yöntemi şu anda etkinleştirilmemiştir.';
           break;
+        case 'configuration-not-found':
+          errorMsg =
+              'Firebase yapılandırması bulunamadı. Lütfen Firebase Console\'da Authentication ayarlarını kontrol edin.';
+          _logger.w(
+              'Firebase Auth configuration-not-found: Firebase Console > Authentication > Sign-in method\'u kontrol edin');
+          break;
         default:
           errorMsg = 'Giriş başarısız: ${e.message ?? e.code}';
       }

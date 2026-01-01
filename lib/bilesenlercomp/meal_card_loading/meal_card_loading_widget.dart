@@ -43,6 +43,8 @@ class _MealCardLoadingWidgetState extends State<MealCardLoadingWidget> {
 
         return GridView.builder(
           padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10.0,

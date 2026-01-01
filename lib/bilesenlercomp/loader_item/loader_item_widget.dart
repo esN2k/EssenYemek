@@ -38,7 +38,7 @@ class _LoaderItemWidgetState extends State<LoaderItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.max,
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
@@ -55,7 +55,8 @@ class _LoaderItemWidgetState extends State<LoaderItemWidget> {
           child: Align(
             alignment: const AlignmentDirectional(1.0, -1.0),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 12.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 12.0, 0.0),
               child: SizedBox(
                 width: 32.0,
                 height: 32.0,

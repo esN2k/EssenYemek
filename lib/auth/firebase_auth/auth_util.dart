@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 import '/backend/backend.dart';
 import 'package:stream_transform/stream_transform.dart';
@@ -9,6 +10,7 @@ import 'firebase_auth_manager.dart';
 
 export 'firebase_auth_manager.dart';
 
+final _logger = Logger();
 final _authManager = FirebaseAuthManager();
 FirebaseAuthManager get authManager => _authManager;
 
@@ -35,6 +37,9 @@ bool get currentUserEmailVerified => currentUser?.emailVerified ?? false;
 String? _currentJwtToken;
 final jwtTokenStream = FirebaseAuth.instance
     .idTokenChanges()
+    .handleError((error) {
+      _logger.e('JWT token stream error: $error');
+    })
     .map((user) async => _currentJwtToken = await user?.getIdToken())
     .asBroadcastStream();
 
@@ -44,6 +49,9 @@ DocumentReference? get currentUserReference =>
 UsersRecord? currentUserDocument;
 final authenticatedUserStream = FirebaseAuth.instance
     .authStateChanges()
+    .handleError((error) {
+      _logger.e('Auth state changes error: $error');
+    })
     .map<String>((user) => user?.uid ?? '')
     .switchMap(
       (uid) => uid.isEmpty
@@ -52,10 +60,11 @@ final authenticatedUserStream = FirebaseAuth.instance
               .handleError((_) {}),
     )
     .map((user) {
-  currentUserDocument = user;
+      currentUserDocument = user;
 
-  return currentUserDocument;
-}).asBroadcastStream();
+      return currentUserDocument;
+    })
+    .asBroadcastStream();
 
 class AuthUserStreamWidget extends StatelessWidget {
   const AuthUserStreamWidget({super.key, required this.builder});
