@@ -5,28 +5,30 @@
 //   flutter run lib/scripts/seed_database.dart
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:logger/logger.dart';
 import '../backend/meal_service.dart';
 import '../firebase_options.dart';
 
+final _logger = Logger();
+
 void main() async {
-  print('🌱 Starting database seed...\n');
+  _logger.i('🌱 Starting database seed...');
 
   try {
     // Initialize Firebase
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    print('✅ Firebase initialized\n');
+    _logger.i('✅ Firebase initialized');
 
     // Seed meals
-    print('📦 Seeding meals...');
+    _logger.i('📦 Seeding meals...');
     await MealService.seedSampleMeals();
-    print('✅ Meals seeded successfully!\n');
+    _logger.i('✅ Meals seeded successfully!');
 
-    print('🎉 Database seed completed successfully!');
-    print('You can now use the app with sample meal data.\n');
+    _logger.i('🎉 Database seed completed successfully!');
+    _logger.i('You can now use the app with sample meal data.');
   } catch (e, stackTrace) {
-    print('❌ Error seeding database: $e');
-    print('Stack trace: $stackTrace');
+    _logger.e('❌ Error seeding database: $e', stackTrace: stackTrace);
   }
 }

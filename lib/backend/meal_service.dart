@@ -1,8 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_util.dart';
+import 'package:logger/logger.dart';
 
 class MealService {
+  static final _logger = Logger();
   static CollectionReference<Map<String, dynamic>> mealsCollection({
     FirebaseFirestore? firestore,
   }) {
@@ -25,8 +25,8 @@ class MealService {
 
     return query.snapshots().map((snapshot) => snapshot.docs
         .map((doc) => MealsRecord.fromSnapshot(doc))
-        .where((meal) =>
-            maxCalories == null || meal.mealCalories <= maxCalories)
+        .where(
+            (meal) => maxCalories == null || meal.mealCalories <= maxCalories)
         .toList());
   }
 
@@ -45,8 +45,8 @@ class MealService {
     final snapshot = await query.get();
     return snapshot.docs
         .map((doc) => MealsRecord.fromSnapshot(doc))
-        .where((meal) =>
-            maxCalories == null || meal.mealCalories <= maxCalories)
+        .where(
+            (meal) => maxCalories == null || meal.mealCalories <= maxCalories)
         .toList();
   }
 
@@ -61,7 +61,7 @@ class MealService {
     // Check if meals already exist
     final existing = await mealsCol.limit(1).get();
     if (existing.docs.isNotEmpty) {
-      print('Meals collection already has data. Skipping seed.');
+      _logger.i('Meals collection already has data. Skipping seed.');
       return;
     }
 
@@ -71,7 +71,7 @@ class MealService {
       await mealsCol.add(meal);
     }
 
-    print('Successfully seeded ${meals.length} meals to Firestore!');
+    _logger.i('Successfully seeded ${meals.length} meals to Firestore!');
   }
 
   static List<Map<String, dynamic>> _getSampleMealsData() {

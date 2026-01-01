@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import '../auth_manager.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
 
@@ -16,6 +17,8 @@ import 'jwt_token_auth.dart';
 import 'github_auth.dart';
 
 export '../base_auth_user_provider.dart';
+
+final _logger = Logger();
 
 class FirebasePhoneAuthManager extends ChangeNotifier {
   bool? _triggerOnCodeSent;
@@ -73,10 +76,17 @@ class FirebaseAuthManager extends AuthManager
         }
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(FFLocalizations.of(context).getText(
-            's9jc94lf' /* En son oturum açmanızın üzerin... */,
-          ))),
+          const SnackBar(
+              content: Text('Hesabı silmeden önce lütfen tekrar oturum açın.')),
+        );
+      } else {
+        if (!context.mounted) {
+          return;
+        }
+        String errorMsg = 'Hesap silinirken hata: ${e.message ?? e.code}';
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(errorMsg)),
         );
       }
     }
@@ -101,10 +111,18 @@ class FirebaseAuthManager extends AuthManager
         }
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(FFLocalizations.of(context).getText(
-            'ch4pfpm9' /* En son oturum açmanızın üzerin... */,
-          ))),
+          const SnackBar(
+              content: Text(
+                  'E-postayı güncellemeden önce lütfen tekrar oturum açın.')),
+        );
+      } else {
+        if (!context.mounted) {
+          return;
+        }
+        String errorMsg = 'E-posta güncellenemedi: ${e.message ?? e.code}';
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(errorMsg)),
         );
       }
     }
@@ -128,10 +146,18 @@ class FirebaseAuthManager extends AuthManager
         }
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(FFLocalizations.of(context).getText(
-            'sgqqgscx' /* Hata:  */,
-          ))),
+          const SnackBar(
+              content: Text(
+                  'Şifreyi güncellemeden önce lütfen tekrar oturum açın.')),
+        );
+      } else {
+        if (!context.mounted) {
+          return;
+        }
+        String errorMsg = 'Şifre güncellenemedi: ${e.message ?? e.code}';
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(errorMsg)),
         );
       }
     }
@@ -144,16 +170,15 @@ class FirebaseAuthManager extends AuthManager
   }) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-    } on FirebaseAuthException {
+    } on FirebaseAuthException catch (e) {
       if (!context.mounted) {
         return null;
       }
+      String errorMsg =
+          'Şifre sıfırlama e-postası gönderilemedi: ${e.message ?? e.code}';
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content: Text(FFLocalizations.of(context).getText(
-          'sgqqgscx' /* Hata:  */,
-        ))),
+        SnackBar(content: Text(errorMsg)),
       );
       return null;
     }
@@ -228,10 +253,10 @@ class FirebaseAuthManager extends AuthManager
         phoneAuthManager
             .update(() => phoneAuthManager.triggerOnCodeSent = false);
       } else if (phoneAuthManager.phoneAuthError != null) {
+        final phoneError = phoneAuthManager.phoneAuthError;
+        String errorMsg = phoneError?.message ?? 'Telefon doğrulama hatası';
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(FFLocalizations.of(context).getText(
-            'sgqqgscx' /* Hata:  */,
-          )),
+          content: Text(errorMsg),
         ));
         phoneAuthManager.update(() => phoneAuthManager.phoneAuthError = null);
       }
@@ -259,8 +284,8 @@ class FirebaseAuthManager extends AuthManager
     // * Finally modify verificationCompleted below as instructed.
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: phoneNumber,
-      timeout:
-          const Duration(seconds: 0), // Skips Android's default auto-verification
+      timeout: const Duration(
+          seconds: 0), // Skips Android's default auto-verification
       verificationCompleted: (phoneAuthCredential) async {
         await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
         phoneAuthManager.update(() {
@@ -337,23 +362,61 @@ class FirebaseAuthManager extends AuthManager
           ? null
           : EssenYemekFirebaseUser.fromUserCredential(userCredential);
     } on FirebaseAuthException catch (e) {
+      _logger.e('Firebase Auth Error - Code: ${e.code}, Message: ${e.message}');
+
       if (!context.mounted) {
         return null;
       }
-      final errorMsg = switch (e.code) {
-        'email-already-in-use' => FFLocalizations.of(context).getText(
-            'ix63qsna' /* Sağlanan kimlik doğrulama bilg... */,
-          ),
-        'INVALID_LOGIN_CREDENTIALS' => FFLocalizations.of(context).getText(
-            'zikarxs8' /* Sağlanan kimlik doğrulama bilg... */,
-          ),
-        _ => FFLocalizations.of(context).getText(
-            'sgqqgscx' /* Hata:  */,
-          ),
-      };
+
+      String errorMsg;
+      switch (e.code) {
+        case 'email-already-in-use':
+          errorMsg = 'Bu e-posta adresi zaten kullanılıyor.';
+          break;
+        case 'invalid-email':
+          errorMsg = 'Geçersiz e-posta adresi.';
+          break;
+        case 'weak-password':
+          errorMsg = 'Şifre çok zayıf. En az 6 karakter olmalı.';
+          break;
+        case 'user-not-found':
+          errorMsg = 'Bu e-posta adresi ile bir hesap bulunamadı.';
+          break;
+        case 'wrong-password':
+          errorMsg = 'Hatalı şifre.';
+          break;
+        case 'INVALID_LOGIN_CREDENTIALS':
+          errorMsg = 'E-posta veya şifre hatalı.';
+          break;
+        case 'network-request-failed':
+          errorMsg =
+              'Ağ bağlantısı hatası. Lütfen internet bağlantınızı kontrol edin.';
+          break;
+        case 'too-many-requests':
+          errorMsg =
+              'Çok fazla başarısız giriş denemesi. Lütfen daha sonra tekrar deneyin.';
+          break;
+        case 'operation-not-allowed':
+          errorMsg = 'Bu giriş yöntemi şu anda etkinleştirilmemiştir.';
+          break;
+        default:
+          errorMsg = 'Giriş başarısız: ${e.message ?? e.code}';
+      }
+
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(errorMsg)),
+      );
+      return null;
+    } catch (e) {
+      _logger.e('Unexpected error during authentication: $e');
+      if (!context.mounted) {
+        return null;
+      }
+
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Beklenmeyen bir hata oluştu: $e')),
       );
       return null;
     }

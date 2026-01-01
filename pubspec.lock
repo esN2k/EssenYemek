@@ -629,13 +629,13 @@ packages:
     source: hosted
     version: "4.0.0"
   logger:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: logger
-      sha256: a7967e31b703831a893bbc3c3dd11db08126fe5f369b5c648a36f821979f5be3
+      sha256: b3ff55aeb08d9d8901b767650285872cb1bb8f508373b3e348d60268b0c7f770
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.2"
+    version: "2.1.0"
   logging:
     dependency: transitive
     description:
