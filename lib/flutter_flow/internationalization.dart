@@ -385,6 +385,22 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'tr': 'Yemek Tercihleri',
       'en': 'Food Preferences',
     },
+    'o4f7n2ld': {
+      'tr': 'Dil Se\u00e7imi',
+      'en': 'Language',
+    },
+    'cw5m0v8s': {
+      'tr': 'Uygulama Dili',
+      'en': 'App Language',
+    },
+    'v3k1t9bq': {
+      'tr': 'T\u00fcrk\u00e7e',
+      'en': 'Turkish',
+    },
+    'y1r9g2e6': {
+      'tr': '\u0130ngilizce',
+      'en': 'English',
+    },
     '0ncruabu': {
       'tr': 'Hakkımızda',
       'en': 'About Us',

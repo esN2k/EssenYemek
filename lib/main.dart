@@ -52,7 +52,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale? _locale = FFLocalizations.getStoredLocale();
+  late Locale _locale;
 
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
 
@@ -67,6 +67,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    _locale = FFLocalizations.getStoredLocale() ?? const Locale('tr');
 
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);

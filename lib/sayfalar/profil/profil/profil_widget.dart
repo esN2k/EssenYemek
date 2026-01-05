@@ -384,6 +384,238 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                           ],
                                         ),
                                       ),
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          logFirebaseEvent(
+                                              'PROFIL_PAGE_LanguageTile_ON_TAP');
+                                          await showModalBottomSheet(
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            context: context,
+                                            builder: (context) {
+                                              final theme =
+                                                  FlutterFlowTheme.of(context);
+                                              final languageCode =
+                                                  FFLocalizations.of(context)
+                                                      .languageCode;
+                                              final isTurkish =
+                                                  languageCode == 'tr';
+                                              final isEnglish =
+                                                  languageCode == 'en';
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: Padding(
+                                                  padding:
+                                                      MediaQuery.viewInsetsOf(
+                                                          context),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    decoration: BoxDecoration(
+                                                      color: theme
+                                                          .secondaryBackground,
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .only(
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                24.0),
+                                                        topRight:
+                                                            Radius.circular(
+                                                                24.0),
+                                                      ),
+                                                    ),
+                                                    child: SafeArea(
+                                                      top: false,
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        24.0,
+                                                                        20.0,
+                                                                        24.0,
+                                                                        8.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'cw5m0v8s' /* Uygulama Dili */,
+                                                                    ),
+                                                                    style: theme
+                                                                        .titleMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Sora',
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          ListTile(
+                                                            title: Text(
+                                                              FFLocalizations
+                                                                      .of(context)
+                                                                  .getText(
+                                                                'v3k1t9bq' /* Türkçe */,
+                                                              ),
+                                                              style: theme
+                                                                  .bodyLarge
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Sora',
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
+                                                            ),
+                                                            trailing: isTurkish
+                                                                ? Icon(
+                                                                    Icons
+                                                                        .check_rounded,
+                                                                    color: theme
+                                                                        .primary,
+                                                                  )
+                                                                : null,
+                                                            onTap: () {
+                                                              logFirebaseEvent(
+                                                                  'PROFIL_PAGE_LanguageTile_Turkish_ON_TAP');
+                                                              setAppLanguage(
+                                                                  context,
+                                                                  'tr');
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                          ),
+                                                          ListTile(
+                                                            title: Text(
+                                                              FFLocalizations
+                                                                      .of(context)
+                                                                  .getText(
+                                                                'y1r9g2e6' /* İngilizce */,
+                                                              ),
+                                                              style: theme
+                                                                  .bodyLarge
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Sora',
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
+                                                            ),
+                                                            trailing: isEnglish
+                                                                ? Icon(
+                                                                    Icons
+                                                                        .check_rounded,
+                                                                    color: theme
+                                                                        .primary,
+                                                                  )
+                                                                : null,
+                                                            onTap: () {
+                                                              logFirebaseEvent(
+                                                                  'PROFIL_PAGE_LanguageTile_English_ON_TAP');
+                                                              setAppLanguage(
+                                                                  context,
+                                                                  'en');
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 12.0),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ).then((value) => safeSetState(() {}));
+                                        },
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 12.0, 0.0, 12.0),
+                                              child: Row(
+                                                mainAxisSize:
+                                                    MainAxisSize.max,
+                                                children: [
+                                                  Container(
+                                                    width: 40.0,
+                                                    height: 40.0,
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .accent1,
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(4.0),
+                                                      child: Icon(
+                                                        Icons.language_rounded,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        size: 20.0,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(18.0, 0.0,
+                                                                0.0, 0.0),
+                                                    child: Text(
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'o4f7n2ld' /* Dil Seçimi */,
+                                                      ),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyLarge
+                                                          .override(
+                                                            fontFamily: 'Sora',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Divider(
+                                              thickness: 1.0,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .accent4,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                       if ((columnCompanyInformationRecord
                                                       ?.name !=
                                                   null &&
@@ -984,6 +1216,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                                           ),
                                         ),
                                       ),
+                                      
                                     ],
                                   );
                                 },
